@@ -6,7 +6,6 @@
 Homestead.json
 Homestead.yaml
 npm-debug*.log*
-.env*
 /public/pdf
 /public/swf
 /.settings
