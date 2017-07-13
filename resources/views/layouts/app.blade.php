@@ -72,35 +72,36 @@
 			</div>
 		</nav>-->
 		<div class="centerLayout">
-			<nav id="Top-Nav-panel">
+			<nav id="TopNav-index">
 				<div
 					style="width: 500px; margin-left: 20px; float: left; padding-bottom: 20px;">
 					<ul>
-						<li><a class="active" href="#home">Home</a></li>
-						<li><a href="#E-Book">E-Book</a></li>
-						<li><a href="#Blog">Blog</a></li>
-						<!-- <li><a href="#about">Subscribe</a></li> -->
-						<li><a href="/search">Search</a></li>
+						<li><a id="home" class="active" href="{{ url('/') }}">Home</a></li>
+						<li><a id="ebook" href="{{ url('/gallery') }}">Gallery</a></li>
+						<li><a id="blog" href="{{ url('/views') }}">Views</a></li>
+						<li><a id="subscribe" href="{{ url('/subscribe') }}">Subscribe</a></li>
+						<li><a id="search" href="{{ url('/search') }}">Search</a></li>
 						<!-- <li><a href="#about">Sitemap</a></li> -->
 						<!-- Authentication Links -->
 						@if (Auth::guest())
-						<li><a href="{{ route('login') }}">Login</a></li>
-						<li><a href="{{ route('register') }}">Subscribe</a></li> @else
+							<li><a id="login" href="{{ route('login') }}">Login</a></li>
+							<!--<li><a id="subscribe" href="{{ route('register') }}">Subscribe</a></li>-->
+						@else
 						<!-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-expanded="false"> {{
 								Auth::user()->name }} <span class="caret"></span>
 						</a>
 
 							<ul class="dropdown-menu" role="menu"> -->
-						<li><a href="{{ route('logout') }}"
-							onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-								Logout </a>
+							<li><a id="logout" href="{{ route('logout') }}"
+								onclick="event.preventDefault();
+														 document.getElementById('logout-form').submit();">
+									Logout </a>
 
-							<form id="logout-form" action="{{ route('logout') }}"
-								method="POST" style="display: none;">{{ csrf_field() }}</form></li>
-						<li><a href="#"> {{ Auth::user()->name }}</a> <!-- </ul></li> -->
-							@endif
+								<form id="logout-form" action="{{ route('logout') }}"
+									method="POST" style="display: none;">{{ csrf_field() }}</form></li>
+							<li><a id="profile" href="#"> {{ Auth::user()->name }}</a> <!-- </ul></li> -->
+						@endif
 					
 					</ul>
 				</div>
@@ -120,48 +121,43 @@
 			<div id="top-bg">
 				<div id="TitlePad">
 					<div id="RKMlogo"></div>
-					<h1>{{ config('app.name', 'Laravel') }}</h1>
-					<h2>100 years E-Book for You</h2>
-				</div>
-				<div id="SearchPanel">
-					<div id="search-layer">
-						<form id="searchform" name="searchform" method="post" action="/search">
-							{{ csrf_field() }}
-							<span id="searchfield1"> <input type="text" name="Search"
-								id="Search" /> <!-- <span class="textfieldRequiredMsg">Search</span> --></span>
-
-							<div id="SearchButton" onclick="event.preventDefault();
-                                                     document.getElementById('searchform').submit();"></div>
-							<br /> <br /> <br />
-							<p>Please enter bengali year for 100 years e-book.</p>
-						</form>
-					</div>
-					<div id="Ebok-icon">
-						<img src="images/book_RKM.png" />
-					</div>
+					<div class="TitleMain">{{ config('app.name', 'Laravel') }}</div>
+					<div class="InsideSubTitle">100 years E-Book for You</div>
+				</div>				
+				<div id="Ebok-icon"><img src="{{asset('images/book_RKM.png')}}" alt="Search Ebook" border="0" usemap="#Map2" />
+				  <map name="Map2" id="Map2">
+					<area shape="rect" coords="6,3,123,120" href="{{ url('/search') }}" alt="Search Ebook" />
+				  </map>
 				</div>
 			</div>
 			<div id="main-bg">
 				<div id="box">@yield('content')</div>
 				<div id="BoxPanel">
 					<div id="box1">
-						<a href="#"><img src="images/blog-1.jpeg" width="150" height="90" /></a>
-						<p>
-							<a href="#">Blog</a>
-						</p>
+						<img src="{{asset('images/blog-icon.png')}}" alt="Write your Blog" border="0" usemap="#Map3" />
+						<map name="Map3" id="Map3">
+							<area shape="rect" coords="-7,-1,101,100" href="{{ url('/views') }}" alt="VIEWS" />
+						</map>
+						<div style="padding-top:10px;"> <b>Views</b></div>
 					</div>
 					<div id="box2">
-						<img src="images/e-bookRKM-100.png" width="150" height="90" />
-						<p>Udbodhan 100 Years</p>
+						<img src="{{asset('images/book-icon.png')}}" alt="100 years e-book" border="0" usemap="#Map4" />
+						<map name="Map4" id="Map4">
+						  <area shape="rect" coords="3,2,98,71" href="{{ url('/search') }}" alt="E-book display" />
+						</map>
+						<div style="padding-top:15px;"><b>Udbodhat 100 Years</b></div>
 					</div>
 					<div id="box3">
-						<img src="images/subscribe-3.jpg" width="150" height="90" />
-						<p>Subscribe</p>
+						<img src="{{asset('images/subscribe-icon.png')}}" alt="Subscribe" border="0" usemap="#Map5" />
+						<map name="Map5" id="Map5">
+						  <area shape="rect" coords="2,1,98,98" href="{{ url('/subscribe') }}" alt="Subscribe" />
+						</map>
+						<div style="padding-top:10px;"><b>Subscribe</b></div>
 					</div>
 
 				</div>
 			</div>
-			<div class="footer"></div>
+			<div class="footer">Copyright © 2017 by Ramkrish Math</div>
 		</div>
 	</div>
 

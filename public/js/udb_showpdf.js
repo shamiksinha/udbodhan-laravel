@@ -333,7 +333,7 @@ function embedSWF(sourceSwfName) {
   if (hasRightVersion) {
     // if we've detected an acceptable version
     // embed the flash movie
-    return AC_FL_RunContent('codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,2,0', 'width', '1636', 'height', '1405', 'src', sourceSwfName, 'quality', 'high', 'pluginspage', 'http://www.adobe.com/go/getflashplayer', 'align', 'middle', 'play', 'false', 'loop', 'false', 'scale', 'noscale', 'wmode', 'window', 'devicefont', 'false', 'id', sourceSwfName, 'bgcolor', '#999999', 'name', sourceSwfName, 'menu', 'true', 'allowFullScreen', 'true', 'allowScriptAccess', 'sameDomain', 'movie', sourceSwfName, 'salign', ''); //end AC code
+    return AC_FL_RunContent('codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,2,0', 'width', '1188', 'height', '972', 'src', sourceSwfName, 'quality', 'high', 'pluginspage', 'http://www.adobe.com/go/getflashplayer', 'align', 'middle', 'play', 'false', 'loop', 'false', 'scale', 'noscale', 'wmode', 'window', 'devicefont', 'false', 'id', sourceSwfName, 'bgcolor', '#999999', 'name', sourceSwfName, 'menu', 'true', 'allowFullScreen', 'true', 'allowScriptAccess', 'sameDomain', 'movie', sourceSwfName, 'salign', ''); //end AC code
   } else {
     // flash is too old or we can't detect the plugin
     var alternateContent = '<p>This content requires version ' + requiredMajorVersion + '.' + requiredMinorVersion + '.' + requiredRevision + ' ' + 'or higher of the Adobe Flash Player.</p>' + '<a href="http://www.adobe.com/go/getflashplayer/">Get Flash</a>';
@@ -371,12 +371,13 @@ $(".books").click(function () {
 	//$("#swfdoc").html('<p>'+id+'</p>');
 	//$("#showpdf").append('<p>'+id+'</p>');
 	$("#showpdf").css('display', 'inline-block');
-	$("#searchResult").css('display', 'none');
+	//$("#searchResult").css('display','none');
+	$("#box").css('float');
 
 	var bookname = id.split('.')[0];
 	var downloadDiv = $('#downloadLink');
-	downloadDiv.append($('<a>').attr('href', 'pdf/' + id).attr('download', 'pdf/' + id).text('Download'));
-	$("#white-box").html(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__udb_flashplayer__["embedSWF"])('swf/' + bookname));
+	downloadDiv.html($('<a>').attr('href', 'pdf/' + id).attr('download', 'pdf/' + id).text('Download'));
+	$("#Display-box").html(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__udb_flashplayer__["embedSWF"])('swf/' + bookname));
 });
 $("#back").click(function () {
 	event.preventDefault();
