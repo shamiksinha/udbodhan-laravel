@@ -36,3 +36,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/pdf', 'PdfController@showPdf');
+
+Route::get('/gallery', function () {
+    return view('gallery');
+});
+Route::get('/views', function () {
+    return view('views');
+});
+
+Route::get('/subscribe', function () {
+    return view('subscribe');
+});
