@@ -76,15 +76,15 @@
 				<div
 					style="width: 500px; margin-left: 20px; float: left; padding-bottom: 20px;">
 					<ul>
-						<li><a id="home" href="{{ url('/') }}">Home</a></li>
-						<li><a id="ebook" href="{{ url('/gallery') }}">Gallery</a></li>
-						<li><a id="blog" href="{{ url('/views') }}">Views</a></li>
-						<li><a id="subscribe" href="{{ url('/subscribe') }}">Subscribe</a></li>
-						<li><a id="search" href="{{ url('/search') }}">Search</a></li>
+						<li><a id="home" @yield('activehome') href="{{ url('/') }}">Home</a></li>
+						<li><a id="gallery" @yield('activegallery') href="{{ url('/gallery') }}">Gallery</a></li>
+						<li><a id="views" @yield('activeviews') href="{{ url('/views') }}">Views</a></li>
+						<li><a id="subscribe" @yield('activesubscribe') href="{{ url('/subscribe') }}">Subscribe</a></li>
+						<li><a id="search" @yield('activesearch') href="{{ url('/search') }}">Search</a></li>
 						<!-- <li><a href="#about">Sitemap</a></li> -->
 						<!-- Authentication Links -->
 						@if (Auth::guest())
-						<li><a id="login" href="{{ route('login') }}">Login</a></li>
+						<li><a id="login" @yield('activelogin') href="{{ route('login') }}">Login</a></li>
 						<!--<li><a id="subscribe" href="{{ route('register') }}">Subscribe</a></li>-->
 						@else
 						<!-- <li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -100,7 +100,7 @@
 
 							<form id="logout-form" action="{{ route('logout') }}"
 								method="POST" style="display: none;">{{ csrf_field() }}</form></li>
-							<li><a id="profile" href="#"> {{ Auth::user()->name }}</a> <!-- </ul></li> -->
+							<!-- <li><a id="profile" href="{{ url('/profile') }}"> {{ Auth::user()->firstname }}</a></li>--> <!-- </ul></li> -->
 						@endif
 					
 					</ul>

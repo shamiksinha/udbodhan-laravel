@@ -25,7 +25,7 @@ Route::get('/about', function () {
 
 Route::get('/ping', 'SolariumController@ping');
 
-Route::match(['get','post'],'/search', 'SolariumController@search');
+Route::match(['get','post'],'/search', 'SolariumController@search')->middleware('auth');
 
 Route::get('/info', function () {
     return view('phpinfo');
@@ -35,7 +35,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/pdf', 'PdfController@showPdf');
+Route::post('/pdf', 'PdfController@showPdf')->middleware('auth');
 
 Route::get('/gallery', function () {
     return view('gallery');
@@ -44,6 +44,8 @@ Route::get('/views', function () {
     return view('views');
 });
 
-Route::get('/subscribe', function () {
-    return view('subscribe');
-});
+Route::get('/subscribe', 'SubscribeController@showSubscribeForm');/*function () {
+	return view('subscribe');//->middleware('auth')
+});*/
+
+Route::post('/subscribe', 'SubscribeController@subscribe');

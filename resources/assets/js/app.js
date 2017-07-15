@@ -21,10 +21,10 @@ const app = new Vue({
     el: '#app'
 });*/
 
-$("#Top-Nav-panel ul li").click(function(){
+/*$("#Top-Nav-panel ul li").click(function(){
 	alert("Nav panel clicked"+event.target.id);
 	alert("Nav panel clicked"+event.srcElement.id);
 	var id=event.target.id;
 	$("#Top-Nav-panel ul li a").removeClass();
 	$(id).addClass("active");
-	});
+	});*/
