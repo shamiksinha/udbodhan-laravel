@@ -1,4 +1,7 @@
 @extends('layouts.app-inner')
+@section('activeviews')
+class="active"
+@endsection
 @section('subtitle')
 <div class="InsideSubTitle">Views</div>
 @endsection

@@ -1,4 +1,7 @@
 @extends('layouts.app-inner')
+@section('activegallery')
+class="active"
+@endsection
 @section('subtitle')
 <div class="InsideSubTitle">100 years E-Book for You</div>
 @endsection
