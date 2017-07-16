@@ -6,7 +6,7 @@
 class="active"
 @endsection
 @section('content')
-<div id="search-boxwrap">
+<div id="white-boxInside">
 	<div style="padding:20px;">
 		<div id="sectionSearch"> <span><b>To search the specific e-book Please insert <span class="req">Year</span>, <span class="req">Month</span> and <span class="req">Name</span> or any <span class="req">Author</span> you like. </b></span>
 			<div  id="SearchPanel">
