@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Solarium\Client;
 use Solarium\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SolariumController extends Controller {
 	protected $client;
@@ -31,6 +32,9 @@ class SolariumController extends Controller {
 		if ($request->getMethod () == Request::METHOD_POST) {
 			$months = array('magh','falgoon','chaitra','baishakh','jaistha','ashar','srabon','vadro','ashyeen','karttik','agrohawan','poush','vadra','jaishtho');
 			$input = $request->input();
+			$searchMonth=$input['month'];
+			/* Log::debug($input);
+			Log::debug($searchMonth); */
 			$searchField=$input['Search'];
 			$pattern="/ /";			
 			$searchWords=preg_split($pattern, $searchField);
@@ -44,7 +48,7 @@ class SolariumController extends Controller {
 			// print_r($query);
 			$queryString=NULL;
 			$yearsfq=array();
-			$monthsfq=array();
+			//$monthsfq=array();
 			$booknumbers=array();
 			$fqString=NULL;
 			$contructedQuery=NULL;
@@ -55,9 +59,9 @@ class SolariumController extends Controller {
 				if (!is_numeric($searchWord) and count(preg_grep('/'.$searchWord.'/',$months))<1){
 					$queryString.=$searchWord;//'author_txt_en_split:*'.$searchWord.'* or subject_txt_en_split:*'.$searchWord.'*';
 					// or bookmonth_txt_en_split:*'.$searchWord.'*';
-				} else if (!is_numeric($searchWord) and count(preg_grep('/'.$searchWord.'/',$months))>0) {
+				} /* else if (!is_numeric($searchWord) and count(preg_grep('/'.$searchWord.'/',$months))>0) {
 					$monthsfq[]=$searchWord;
-				} else if (is_numeric($searchWord) and $searchWord<25){
+				} */ else if (is_numeric($searchWord) and $searchWord<25){
 					$booknumbers[]=$searchWord;
 				}else if (is_numeric($searchWord)) {
 					$yearsfq[]=$searchWord;
@@ -80,13 +84,21 @@ class SolariumController extends Controller {
 					$i=$i+1;
 				}
 			}
-			if (count($monthsfq)>0){
+			if (count($searchMonth)>0){
 				$i=1;
-				foreach ($monthsfq as $month) {
-					$fqString='bookmonth_txt_en_split:'.$month;
-					$query->createFilterQuery('filterByMonth'.$i)->setQuery($fqString);
+				$fqString=NULL;
+				foreach ($searchMonth as $month) {
+					if (isset($fqString) and $i<=count($searchMonth)){
+						$fqString=$fqString.' or ';
+					}
+					//'bookmonth_txt_en_split:'
+					$fqString=$fqString.$month;
+					
 					$i=$i+1;
 				}
+				$fqString='bookmonth_txt_en_split:('.$fqString.')';
+				Log::debug($fqString);
+				$query->createFilterQuery('filterByMonths')->setQuery($fqString);
 			}
 			if (!isset($queryString)){
 				$queryString='*';	
@@ -163,7 +175,7 @@ class SolariumController extends Controller {
 					}
 				}
 			} */
-			return view('search')->with(['results'=>$resultset])->with('query',$searchField);
+			return view('search')->with(['results'=>$resultset])->with('query',$searchField)->with('months',$searchMonth);
 		}
 		if ($request->getMethod () == Request::METHOD_GET) {
 			return view('search');
