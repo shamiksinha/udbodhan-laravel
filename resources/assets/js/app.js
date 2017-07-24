@@ -28,3 +28,13 @@ const app = new Vue({
 	$("#Top-Nav-panel ul li a").removeClass();
 	$(id).addClass("active");
 	});*/
+/*$(embed).on("contextmenu",function(e){
+    return false;
+});*/
+$('body').bind('cut copy paste', function (e) {
+    e.preventDefault();
+});
+
+$("body").on("contextmenu",function(e){
+    return false;
+});
