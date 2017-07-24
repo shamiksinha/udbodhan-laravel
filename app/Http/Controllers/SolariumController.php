@@ -32,10 +32,13 @@ class SolariumController extends Controller {
 		if ($request->getMethod () == Request::METHOD_POST) {
 			$months = array('magh','falgoon','chaitra','baishakh','jaistha','ashar','srabon','vadro','ashyeen','karttik','agrohawan','poush','vadra','jaishtho');
 			$input = $request->input();
-			$searchMonth=$input['month'];
+			$searchMonth=array();
+			if (array_key_exists('month',$input)){
+				$searchMonth=$input['month'];
+			}
 			/* Log::debug($input);
 			Log::debug($searchMonth); */
-			$searchField=$input['Search'];
+			$searchField=trim(str_replace('*','',$input['Search']));
 			$pattern="/ /";			
 			$searchWords=preg_split($pattern, $searchField);
 			
@@ -175,7 +178,7 @@ class SolariumController extends Controller {
 					}
 				}
 			} */
-			return view('search')->with(['results'=>$resultset])->with('query',$searchField)->with('months',$searchMonth);
+			return view('search')->with(['results'=>$resultset])->with('query',$input['Search'])->with('months',$searchMonth);
 		}
 		if ($request->getMethod () == Request::METHOD_GET) {
 			return view('search');

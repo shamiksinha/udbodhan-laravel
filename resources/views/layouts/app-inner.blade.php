@@ -20,8 +20,6 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
-    
-    
 </head>
 <body>
 	<div id="app-inner">
@@ -134,7 +132,7 @@
 							</div>-->
 							<!--<div style="padding-top:150px; height:auto">-->
 								<!--<p>Search result </p>-->
-								<!--<div id="box">-->
+								<!--<div id="box">-->									
 									@yield('content')
 								<!--</div>-->
 							<!--</div>-->
@@ -146,9 +144,8 @@
 		<!--</div>-->
 	</div>
 
-	<!-- Scripts -->
+	<!-- Scripts -->	
 	<script src="{{ asset('js/app.js') }}"></script>
-	
 	@yield('scripts')
 </body>
 </html>
