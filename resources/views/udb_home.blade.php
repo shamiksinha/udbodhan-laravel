@@ -14,4 +14,10 @@ Now, about the digitisation process, it is Adamaris Consultancy Services and the
 <br />
 The treasure house of knowledge that comes for a fraction of a cost is more than its weight in gold, so subscribe now. Each and every online issue starting from the first is a collection of thoughts that derives its richness from ancient Indian heritage. This treasure is awaiting the eyes of enthusiastic readers to disseminate the vastness of its wisdom and brings a fresh perspective to the India that Was, Is and destined to be in the years Ahead.The treasure house of knowledge that comes for a fraction of a cost is more than its weight in gold. Therefore subscribe now. Each and every online issue starting from the first is a collection of thoughts that derives its richness from ancient Indian heritage. This treasure is awaiting the eyes of enthusiastic readers to disseminate the vastness of its wisdom and brings a fresh perspective to the India that Was, Is and destined to be in the years Ahead.
 <br/>
+<br/> -- 
+<br/> Swami Tryambakeshananda
+<br/> Udbodhan Office
+<br/> 1, Udbodhan Lane
+<br/> Baghbazar, Kolkata-700 003
+<br/> Mobile 09432315427
 @endsection

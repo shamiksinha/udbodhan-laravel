@@ -499,7 +499,7 @@ a:hover {
 
 				</div>
 			</div>
-			<div class="footer">Copyright &#x24B8; 2017 - maintained by monastic members of Ramakrishna Math, Baghbazar</div>
+			<div class="footer">Copyright &#x24B8; 2017 by Ramkrishna Math</div>
 		</div>
 	</div>
 

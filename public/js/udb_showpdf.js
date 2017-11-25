@@ -369,7 +369,7 @@ $(".books").click(function () {
 	var bookname = id.split('.')[0];
 	var downloadDiv = $('#downloadLink');
 	downloadDiv.html($('<a>').attr('href', 'pdf/' + id).attr('download', 'pdf/' + id).text('Download'));
-	$("#Display-box").html(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__udb_flashplayer__["embedSWF"])('swf/' + bookname, '972', '1188'));
+	$("#Display-box").html(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__udb_flashplayer__["embedSWF"])('swf/' + bookname, '1188', '972'));
 });
 $("#back").click(function () {
 	event.preventDefault();

@@ -453,24 +453,22 @@ a:hover {
 				<!--<div id="Ebok-icon">
 								<img src="images/book_RKM.png" />
 							</div>-->
-				<!--<div style="padding-top:150px; height:auto">-->
-				<!--<p>Search result </p>-->
-				<!--<div id="box">-->
-				@yield('content')
-				<!--</div>-->
-				<!--</div>-->
-
-				<div id="Ad-space">@yield('ad-space')</div>
+							<!--<div style="padding-top:150px; height:auto">-->
+								<!--<p>Search result </p>-->
+								<!--<div id="box">-->									
+									@yield('content')
+								<!--</div>-->
+							<!--</div>-->
+						
+					<div id="Ad-space">@yield('ad-space')</div>
+				</div>
 			</div>
-		</div>
-		<div class="footer">Copyright &#x24B8; 2017 - maintained by monastic members of Ramakrishna Math, Baghbazar</div>
+			<div class="footer">Copyright &#x24B8; 2017 by Ramkrishna Math</div>
 		<!--</div>-->
 	</div>
 
-	<!-- Scripts -->
-	<script src="{{ asset('js/app.js') }}" async></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript" async/>-->
-	<link href="{{ asset('css/rkm-udb.css') }}" rel="stylesheet">
+	<!-- Scripts -->	
+	<script src="{{ asset('js/app.js') }}"></script>
 	@yield('scripts')
 </body>
 </html>
