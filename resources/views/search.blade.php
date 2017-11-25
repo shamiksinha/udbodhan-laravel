@@ -1,6 +1,6 @@
 @extends('layouts.app-inner')
 @section('subtitle')
-<div class="InsideSubTitle">Search 100 years e-Book</div>
+<div class="InsideSubTitle">Search 100 years e-magazine</div>
 @endsection
 @section('activesearch')
 class="active"
@@ -8,7 +8,7 @@ class="active"
 @section('content')
 <div id="white-boxInside">
 	<div style="padding:20px;">
-		<div id="sectionSearch"> <span><b>To search the specific e-book Please insert <span class="req">Year</span>, <span class="req">Month</span> and <span class="req">Name</span> or any <span class="req">Author</span> you like. </b></span>
+		<div id="sectionSearch"> <span><b>To search the specific e-magazine Please insert <span class="req">Year</span>, <span class="req">Month</span> and <span class="req">Name</span> or any <span class="req">Author</span> you like. </b></span>
 			<div  id="SearchPanel">
 				<div id="search-layer">
 					<form id="searchform" name="searchform" method="post" action="/search">
@@ -62,12 +62,13 @@ class="active"
 						@endif					
 				<!-- </div> -->
 			</div>
-		</div>
+		</div>		
 		<div id="showpdf" style="display: none">
+			<div><b style="font-size:16px">এই প্রচ্ছদটি ডিজিটাল রূপান্তর</b></div>
 			<!--<a href="#" id="back">&ldsh; Go back</a>-->
 			<div id="downloadLink" class="centerLayout"></div>
 			<br />	
-			<div id="Display-box">
+			<div id="Display-box" style="margin-top:10px">
 			</div>	
 		</div>
 		@endif
