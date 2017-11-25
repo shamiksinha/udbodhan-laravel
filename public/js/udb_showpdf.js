@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -327,13 +327,13 @@ var requiredRevision = 2;
 // -----------------------------------------------------------------------------
 
 
-function embedSWF(sourceSwfName) {
+function embedSWF(sourceSwfName, height, width) {
   var hasRightVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
 
   if (hasRightVersion) {
     // if we've detected an acceptable version
     // embed the flash movie
-    return AC_FL_RunContent('codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,2,0', 'width', '1188', 'height', '972', 'src', sourceSwfName, 'quality', 'high', 'pluginspage', 'http://www.adobe.com/go/getflashplayer', 'align', 'middle', 'play', 'false', 'loop', 'false', 'scale', 'noscale', 'wmode', 'window', 'devicefont', 'false', 'id', sourceSwfName, 'bgcolor', '#999999', 'name', sourceSwfName, 'menu', 'true', 'allowFullScreen', 'true', 'allowScriptAccess', 'sameDomain', 'movie', sourceSwfName, 'salign', ''); //end AC code
+    return AC_FL_RunContent('codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,2,0', 'width', width, 'height', height, 'src', sourceSwfName, 'quality', 'high', 'pluginspage', 'http://www.adobe.com/go/getflashplayer', 'align', 'middle', 'play', 'false', 'loop', 'false', 'scale', 'noscale', 'wmode', 'window', 'devicefont', 'false', 'id', sourceSwfName, 'bgcolor', '#999999', 'name', sourceSwfName, 'menu', 'true', 'allowFullScreen', 'true', 'allowScriptAccess', 'sameDomain', 'movie', sourceSwfName, 'salign', ''); //end AC code
   } else {
     // flash is too old or we can't detect the plugin
     var alternateContent = '<p>This content requires version ' + requiredMajorVersion + '.' + requiredMinorVersion + '.' + requiredRevision + ' ' + 'or higher of the Adobe Flash Player.</p>' + '<a href="http://www.adobe.com/go/getflashplayer/">Get Flash</a>';
@@ -343,15 +343,7 @@ function embedSWF(sourceSwfName) {
 
 /***/ }),
 
-/***/ 38:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(9);
-
-
-/***/ }),
-
-/***/ 9:
+/***/ 10:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -377,13 +369,37 @@ $(".books").click(function () {
 	var bookname = id.split('.')[0];
 	var downloadDiv = $('#downloadLink');
 	downloadDiv.html($('<a>').attr('href', 'pdf/' + id).attr('download', 'pdf/' + id).text('Download'));
-	$("#Display-box").html(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__udb_flashplayer__["embedSWF"])('swf/' + bookname));
+	$("#Display-box").html(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__udb_flashplayer__["embedSWF"])('swf/' + bookname, '972', '1188'));
 });
 $("#back").click(function () {
 	event.preventDefault();
 	$("#showpdf").css('display', 'none');
 	$("#searchResult").css('display', 'inline-block');
 });
+$("#Search").keypress(function (event) {
+	var keyascii = event.which;
+	if (keyascii < 32) {
+		event.preventDefault();
+	} else if (keyascii > 32 && keyascii < 42) {
+		event.preventDefault();
+	} else if (keyascii > 42 && keyascii < 48) {
+		event.preventDefault();
+	} else if (keyascii > 57 && keyascii < 65) {
+		event.preventDefault();
+	} else if (keyascii > 90 && keyascii < 97) {
+		event.preventDefault();
+	} else if (keyascii > 122) {
+		event.preventDefault();
+	}
+});
+
+/***/ }),
+
+/***/ 40:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(10);
+
 
 /***/ })
 

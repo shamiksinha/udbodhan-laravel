@@ -1,29 +1,6 @@
 @charset "UTF-8";
 /* CSS Document */
 
-
-
-html, body {
-	font: 100% Verdana, Arial, Helvetica, sans-serif;
-	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
-	padding: 0;
-	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
-	color: #000000;
-	background-color:#C60;
-	background:url(../images/blr-math-bg.jpg) no-repeat fixed;
-	font-size:12px;
-}
- html, body, a {
-	text-decoration:none;
-	color:#000;}
-
-.centerLayout
-{
-  margin: 0 auto;
-  width: 862px;
-  min-height: 100%;
- 
-}
 .Inner-centerLayout
 {
   margin: 0 auto;
@@ -50,90 +27,14 @@ html, body {
   padding-bottom:-38px;
 }*/
 
-#RKMlogo{
-	background-image:url(../images/RKM-logo-002.png);
-	margin-left:70px;
-	width:80px;
-	height:86px;
-	
-	}
 
-  
-.footer {
-  position: fixed;
-  background-color:#333;
-  margin-top:0px;
-  height:40px;
-  color:#CCC;
-  padding-top:8px;
-  bottom: 0;
-  right: 0;
-  left:0;
-  width: 100%;
-}
-
-#Top-Nav-panel, #TopNav-index{
-	width:100%;
-	height:40px;
-	clear:both;
-	padding-bottom:0px;
-	background-color:#C60;
-	position:fixed;
-	margin-top:0px;
-		 -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-
-	}
-
-#TopNav-index{
-	marker-offset:inherit;
-	width:770px;
-	margin-right:40px;
-	border-radius: 4px;
-	}
-
-#top-bg {
-  width: 862px;
-  height: 517px;
-  background-image:url(../images/RKM-002top-bg.png);
-}
-
-#innertop {
+.webp #innertop  {
   margin:0 auto;
   /*background-color:#EDEDED;*/
   width: 1024px;
   height:200px;
-  background:url(../images/inner-header-new-03.png) no-repeat;
+  background:url(../images/inner-header-new-03.webp) no-repeat;
   /*background-image:url(../images/inner-header-new-02.png) no-repeat;*/
-}
-
-
-#main-bg {
-	align-content: center;F
-	position: inherit;
-	padding-bottom:50px;
-	padding-top:10px;
-	width:780px;
-	min-height:100%px;
-	background-image:url(../images/RKM-bg-001.png);
-	background-repeat:repeat-y;
-
-}
-
-#box, #boxinsd
-{
-
-  width:100%;
-  height: auto;
-  background-color: #fff;
-  border-radius: 6px;
-  border: 1px dotted black;
-  opacity: 0.5;
-  color:#000;
-  padding:30px;
-  font-size:12px;
-  text-align:justify;
 }
 
 #boxinsd
@@ -145,7 +46,6 @@ html, body {
   opacity: 0.6;
 
 }
-
 
 
 #Display-box
@@ -192,11 +92,11 @@ html, body {
 
 }
 
-#Views-BG
+.webp #Views-BG 
 {
   width:100%;
   height:auto;
-  background:url(../images/editor-001.jpg) no-repeat fixed;
+  background:url(../images/editor-001.webp) no-repeat fixed;
   /*background-color:#EDEDED;
   border: 1px dotted black;
   opacity: 0.5;*/
@@ -205,8 +105,8 @@ html, body {
   text-align: center;
   padding-bottom:50px;
   padding-top:50px;
-
 }
+
 #white-boxTitle
 {
   width:100%;
@@ -219,11 +119,6 @@ html, body {
   text-align: center;
 }
  /* end body area */
-
-p::first-letter {
-    color: #3330;
-    font-size: xx-large;
-}
 
 .floating-box {
     float: left;
@@ -240,9 +135,7 @@ p::first-letter {
     overflow: visible;
 }
 
-
-
-.left-colLogo {
+.webp .left-colLogo {
     float: left;
 	text-align: center;
 	width: 85px;
@@ -250,8 +143,8 @@ p::first-letter {
 	background-color:#fff;
 	text-align:center;
 
- background-position:center;
- background-image:url(../images/RKM-logo.png)
+	background-position:center;
+	background-image:url(../images/RKM-logo.webp)
 }
 .center-col-MainNav {
     float: left;
@@ -267,45 +160,7 @@ p::first-letter {
     width: 25%;
 }
 
- /* main navigation */
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #C60;
-	size:300px;
-	font-size:12px;
-	text-transform:uppercase;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-a:hover:not(.active) {
-    background-color: #666;
-	 border-radius: 4px;
-}
-
-.active {
-background-color: #333;
-border-bottom-color:#FFF;
- border-radius: 4px;
-
-
-}
-
-
- /* social media icons */
+/* social media icons */
  
 
 
@@ -324,65 +179,16 @@ border-bottom-color:#FFF;
     display: inline-block;
 }
 
-/* Set up the social media icons and enable transitioning for a smooth hovering effect */
-#socialMedia{
-	padding-top:5px;
-	padding-right:100px;
-	margin-right:20px;
-	margin-top:0px;
-	float:right;
-	width:157px;
-	height:26px;
-	}
-	
-	
-	#Inner-socialMedia{
+#Inner-socialMedia{
 	padding-top:5px;
 	margin-top:0px;
 	margin-right:10px;
 	float:right;
 	width:157px;
 	height:26px;
-	}
-	
-	
-/*Title*/
-
-
-
-#TitlePad{
-	padding-top:180px;
-	margin-left:380px;
-	text-align:left
-	
-	}
-
-h1 {
-	font-family: "Times New Roman", Times, serif;
-	font-style:bold;
-	font-size:56px;
-    color: Black;
-    text-shadow: 2px 2px 4px #9d9d9d;
-	line-height:10px;
-	
 }
-h2 {
-	font-style:normal;
-	font-stretch: wider;
-	font-size:16px;
-	text-indent: 10px;
-	line-height:5px;
-	}
-.TitleMain {
-	font-family: "Times New Roman", Times, serif;
-	/*font-style:bold;*/
-	font-weight:bold;
-	font-size:56px;
-    color: Black;
-	padding-top:20px;
-    text-shadow: 2px 2px 4px #9d9d9d;
 	
-}
+
 .InsideTitle {
 	font-family: "Times New Roman", Times, serif;
 	/*font-style:bold;*/
@@ -393,16 +199,7 @@ h2 {
     text-shadow: 2px 2px 4px #9d9d9d;
 	
 }
-.InsideSubTitle {
-	font-style:normal;
-	font-stretch: wider;
-	font-size:16px;
-	text-indent: 10px;
-	padding-top:10px;
-	line-height:5px;
-	font-weight:bold;
-	text-shadow: 2px 2px 4px #9d9d9d;
-	}
+
 #SubTitleDiv {
 	float:left;
 	width:auto;
@@ -424,36 +221,26 @@ h2 {
 	margin-top:20px;
 	margin-left:185px;
 	text-align:left;
-	 width:350px; 
-	 height: auto;"
+	 width:auto; 
+	 height: auto;
 	
 	}
 #search-layerInsd{
 	margin-top:5px;
 	margin-left:5px;
 	 width:350px; 
-	 height: 10px;"
+	 height: 10px;
 	
 	}	
 	
 	
-#Ebok-icon{
-
-	float:left;
-	padding-left:450px;
-	padding-top:15px;
-	height:100;
-	width:100;
-
-	}
-	
-	.SearchImg{
+.webp .SearchImg{
 		height:123px;
 		width:128px;
-		background:url(../images/book_RKM-hover.png) no-repeat;
-		}
+		background:url(../images/book_RKM-hover.webp) no-repeat;
+}
 	
-		#boxshadowSmll {
+#boxshadowSmll {
 	float:left;
     position:absolute;
     -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
@@ -482,93 +269,31 @@ h2 {
 	border: 1px dotted black;
     opacity: 0.7;
 	padding:5px 5px 5px 5px;
-	border-radius: 4px;
-    
+	border-radius: 4px;    
 	}
-	 #dropDown{
-		 float:left;
-	width:100px;
-    
-	}
-#SearchButton{
+#dropDown{
 	float:left;
-	background:url(../images/RKM-search-icon.png) no-repeat;
+	background-color: transparent;
+	border: 0px dotted black;
+	padding-left:5px;
+	padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+	width:auto;    
+}
+
+.webp #SearchButton {
+	float:left;
+	background:url(../images/RKM-search-icon.webp) no-repeat;
 	width:30px;
 	height:32px;
 	background-color:#000;
 	margin-top:2px;
 	margin-left:5px;
     border-radius: 4px;
-	cursor:pointer;
+	cursor:pointer;	
+}
 	
-	}
-	
-	/* Box shadow */
-	
-#BoxPanel{
-	clear:both;
-	padding:20px;
-	margin:20px;
-	margin-right:50px;
-	align-content: center;
-	height:250px;
-	}
-	
-#boxshadow, #box1, #box2, #box3 {
-	position:absolute;
-    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    padding:8px;
-	padding-bottom:50px;
-    background: #F0F0F0;
-	border-radius: 6px;
-}
-
-/* Make the image fit the box */
-#boxshadow, #box1, #box2, #box3, img {
-    
-    width: 100%px;
-    border: 0px solid #8a4419;
-    border-style: inset;
-
-}
-
-
-#box1 {
-	font-size:16px;
-	font-weight:bold;
-	margin-left:15px;
-	display:block;
-    float:left;
-    width:150px;
-    padding: 6px;
-	padding-bottom:50px;
-}
-
-
-#box2 {
-    /*display:inline-block;*/
-	font-size:16px;
-	font-weight:bold;
-	margin-left:265px;
-	float:left;
-    width:150px;
-    padding: 6px;
-	padding-bottom:50px;
-}
-
-#box3 {
-	font-size:16px;
-	font-weight:bold;
-	position:relative;
-	float:right;
-	width:150px;
-    padding: 6px;
-	padding-bottom:50px;
-}
-
-
 #Ad-space{
 	float:left;
 	text-align:justify;
@@ -587,22 +312,7 @@ h2 {
   border-radius: 5px;
 }*/	
 
-* {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
-
-section {
-  width: 275px;
-  /*background: #ecf0f1;*/
-  background: #CAB28B;
-  padding: 0 30px 30px 30px;
-  margin: 60px auto;
-  text-align: center;
-  border-radius: 5px;
-box-shadow: 2px 2px 5px rgba(0,0,0,.3);
-}
 
 #sectionSbcrb, #sectionSearch, #SearchResult {
   width: 600px;
@@ -629,25 +339,19 @@ box-shadow: 2px 2px 5px rgba(0,0,0,.3);
     border-radius: 6px;
   border: 1px dotted black;
   box-shadow:none;
-	}
+}
 
-.LogoInner {
+.webp .LogoInner {
   display: block;
   position: relative;
   margin: 0 auto;
   top: -40px;
   height: 80px;
   width: 80px;
-  background:url(../images/RKM-logo-002.png) center center no-repeat, #f39c12;
+  background:url(../images/RKM-logo-002.webp) center center no-repeat, #f39c12;
   border-radius: 50%;
 box-shadow: 1px 1px 2px rgba(0,0,0,.3);
 
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: 100;
-  margin-bottom: 30px;
 }
 
 input {
@@ -696,20 +400,6 @@ button:hover {
   background: #666;
 }
 
-h2 {
-  font-size: .75em;
-}
-
-a {
-  color: #e74c3c;
-  text-decoration: none;
-  transition: all ease-in-out .2s;
-}
-
-a:hover {
-  color: #FC0;
-}
-
 .subscrb{
 	width:440px;
 }
@@ -721,11 +411,11 @@ a:hover {
   
  /* Subscribe page bg*/ 
   
-  #subcrb-boxwrap, #search-boxwrap
+.webp #subcrb-boxwrap, #search-boxwrap 
 {
   width:100%;
   height:auto;
-  background:url(../images/subscribe-bg1.jpg) no-repeat fixed;
+  background:url(../images/subscribe-bg1.webp) no-repeat fixed;
  /* background-color:#EDEDED;
   border: 1px dotted black;
   opacity: 0.5;*/
@@ -736,9 +426,10 @@ a:hover {
   padding-top:50px;
 
 }
-#search-boxwrap
+
+.webp #search-boxwrap 
 {
-  background:url(../images/e-book-bg.jpg) no-repeat fixed;
+  background:url(../images/e-book-bg.webp) no-repeat fixed;
 }
 .flt-left, .flt-big {
 	width:200px;
@@ -748,98 +439,15 @@ a:hover {
 	background-color:#CCC;
   }
   
- .flt-big {
+.flt-big {
 	width:440px;
-  }
-  #Flash-Btn{
+}
+
+.webp #Flash-Btn {
 	  width:40px;
 	  height:40px;
-	  background:url(../images/Flash-Player-Icon.png) no-repeat;
+	  background:url(../images/Flash-Player-Icon.webp) no-repeat;
 	  float:right;
 	  margin:10px 10px 10px 10px;
 	  cursor:se-resize;
-	  }
-	  
-	  
-	  /*-------------image gallery start---------------*/
-
-       .slider-holder
-        {
-            width: 800px;
-            height: 400px;
-            background-color: #666;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 0px;
-            text-align: center;
-            overflow: hidden;
-        }
-        
-        .image-holder
-        {
-            width: 2400px;
-            background-color: #666;
-            height: 400px;
-            clear: both;
-            position: relative;
-            
-            -webkit-transition: left 2s;
-            -moz-transition: left 2s;
-            -o-transition: left 2s;
-            transition: left 2s;
-        }
-        
-        .slider-image
-        {
-            float: left;
-            margin: 0px;
-            padding: 0px;
-            position: relative;
-        }
-        
-        #slider-image-1:target ~ .image-holder
-        {
-            left: 0px;
-        }
-        
-        #slider-image-2:target ~ .image-holder
-        {
-            left: -400px;
-        }
-        
-        #slider-image-3:target ~ .image-holder
-        {
-            left: -800px;
-        }
-		 #slider-image-4:target ~ .image-holder
-        {
-            left: -1200px;
-        }
-         #slider-image-5:target ~ .image-holder
-        {
-            left: -1600px;
-        }
-		 #slider-image-6:target ~ .image-holder
-        {
-            left: -2200px;
-        }
-		 #slider-image-6:target ~ .image-holder
-        {
-            left: -2400px;
-        }
-		
-        .button-holder
-        {
-            position: relative;
-            top: -20px;
-        }
-        
-        .slider-change
-        {
-            display: inline-block;
-            height: 20px;
-            width: 20px;
-            border-radius: 5px;
-            background-color: brown;
-        }
-/*..............image-gallery css-end............*/
+}
