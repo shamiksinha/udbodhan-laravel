@@ -1,0 +1,423 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+
+html, body {
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+	background-color:#C60;
+	font-size:12px;
+}
+ html, body, a {
+	text-decoration:none;
+	color:#000;}
+
+.centerLayout
+{
+  margin: 0 auto;
+  width: 862px;
+  min-height: 100%;
+ 
+}
+.Inner-centerLayout
+{
+  margin: 0 auto;
+  width: 1000px;
+  min-height: 100%;
+ 
+}
+
+#inner-Conten{
+	min-height:100px;
+
+	
+	}
+
+/*.centerLayout-inside {
+  padding-bottom:-38px;
+}*/
+
+#RKMlogo{
+	background-image:url(../images/RKM-logo-002.png);
+	margin-left:70px;
+	width:80px;
+	height:86px;
+	
+	}
+
+  
+.footer {
+  position: fixed;
+  background-color:#333;
+  margin-top:0px;
+  height:40px;
+  bottom: 0;
+  right: 0;
+  left:0;
+  width: 100%;
+}
+
+#Top-Nav-panel{
+	height:40px;
+	clear:both;
+	padding-bottom:20px;
+	
+	}
+
+#top-bg {
+  width: 862px;
+  height: 517px;
+  background-image:url(../images/RKM-002top-bg.png);
+}
+
+#innertop {
+  margin:0 auto;
+  background-color:#EDEDED;
+  width: 1000px;
+  height:200px;
+  background:url(../images/inner-header001.png) no-repeat;
+}
+
+
+#main-bg {
+	align-content: center;
+	position: inherit;
+	padding-bottom:50px;
+	padding-top:10px;
+	width:780px;
+	min-height:100%px;
+	background-image:url(../images/RKM-bg-001.png);
+	background-repeat:repeat-y;
+
+}
+
+#box
+{
+
+  width:100%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px dotted black;
+  opacity: 0.5;
+  color:#000;
+  padding:30px;
+  font-size:12px;
+  text-align:justify;
+
+}
+#white-box
+{
+  width:auto;
+  height: auto;
+  background-color:#EDEDED;
+  /*border: 1px dotted black;
+  opacity: 0.5;*/
+  color:#333;
+  font-size:12px;
+  text-align: center;
+  /*padding-bottom:50px;
+  padding-top:50px;*/
+
+}
+
+ /* end body area */
+
+p::first-letter {
+    color: #3330;
+    font-size: xx-large;
+}
+
+.floating-box {
+    float: left;
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+    border: 3px solid #73AD21;  
+}
+.overflow {
+    background-color: #eee;
+    width: 200px;
+    height: 100px;
+    border: 1px dotted black;
+    overflow: visible;
+}
+
+
+
+.left-colLogo {
+    float: left;
+	text-align: center;
+	width: 85px;
+	height: 100px;
+	background-color:#fff;
+	text-align:center;
+
+ background-position:center;
+ background-image:url(../images/RKM-logo.png)
+}
+.center-col-MainNav {
+    float: left;
+    width: 50%;
+	margin-left:20px;
+	text-align:left;
+	padding-top:70px;
+	text-transform:uppercase;
+	color:
+}
+.right-col-ScialNav {
+    float: left;
+    width: 25%;
+}
+
+ /* main navigation */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #C60;
+	size:300px;
+	font-size:12px;
+	text-transform:uppercase;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+a:hover:not(.active) {
+    background-color: #666;
+	 border-radius: 4px;
+}
+
+.active {
+background-color: #333;
+border-bottom-color:#FFF;
+ border-radius: 4px;
+
+
+}
+
+
+ /* social media icons */
+ 
+
+
+/* Resets default styling */
+.social-media-icons {
+    list-style: none;
+	float: left;
+	padding-right:40px;
+	padding-top:10px;
+	margin:opx;
+    padding: 0;
+}
+
+/* Displays the list-items in a row */
+.social-media-icons li {
+    display: inline-block;
+}
+
+/* Set up the social media icons and enable transitioning for a smooth hovering effect */
+#socialMedia{
+	padding-top:5px;
+	padding-right:100px;
+	margin-top:0px;
+	float:right;
+	width:157px;
+	height:26px;
+	}
+	
+	
+#Inner-socialMedia{
+	padding-top:5px;
+	margin-top:0px;
+	float:right;
+	width:157px;
+	height:26px;
+	}
+	
+	
+/*Title*/
+
+
+
+#TitlePad{
+	padding-top:180px;
+	margin-left:380px;
+	text-align:left
+	
+	}
+
+h1 {
+	font-family: "Times New Roman", Times, serif;
+	font-style:bold;
+	font-size:56px;
+    color: Black;
+    text-shadow: 2px 2px 4px #9d9d9d;
+	line-height:10px;
+	
+}
+h2 {
+	font-style:normal;
+	font-stretch: wider;
+	font-size:16px;
+	text-indent: 10px;
+	line-height:5px;
+	}
+	
+#SearchPanel{
+	clear:both;
+	height: 100px;
+	}
+	
+#search-layer{
+	float:left;
+	margin-top:40px;
+	margin-left:80px;
+	text-align:left;
+	 width:350px; 
+	 height: auto;"
+	
+	}
+	
+#Ebok-icon{
+
+	float:left;
+	height:100;
+	width:100;
+
+	}
+	
+#boxshadowSmll {
+	float:left;
+    position:absolute;
+    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    padding: 4px;
+    padding-bottom: 10px;
+    background: white;
+}
+
+/* Make the image fit the box */
+#boxshadowSmll img {
+    width: 120px;
+    border: 1px solid #8a4419;
+    border-style: inset;
+}
+
+#Search{
+	float:left;
+	font-size:16px;
+	color:#000;
+	margin-top:2px;
+	width:250px;
+	height:30px;
+	background-color: #FC0;
+	border: 1px dotted black;
+    opacity: 0.7;
+	padding:5px 5px 5px 5px;
+	border-radius: 4px;
+    
+	}
+#SearchButton{
+	float:left;
+	background:url(../images/RKM-search-icon.png) no-repeat;
+	width:30px;
+	height:34px;
+	background-color:#000;
+	margin-top:5px;
+	margin-left:5px;
+    border-radius: 4px;
+	cursor:pointer;
+	
+	}
+	
+	/* Box shadow */
+	
+#BoxPanel{
+	clear:both;
+	padding:20px;
+	margin:20px;
+	margin-right:50px;
+	align-content: center;
+	height:250px;
+	}
+	
+#boxshadow, #box1, #box2, #box3 {
+	position:absolute;
+    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    padding:8px;
+	padding-bottom:50px;
+    background: #F0F0F0;
+	border-radius: 6px;
+}
+
+/* Make the image fit the box */
+#boxshadow, #box1, #box2, #box3, img {
+    
+    width: 100%px;
+    border: 0px solid #8a4419;
+    border-style: inset;
+
+}
+
+
+#box1 {
+	font-size:16px;
+	font-weight:bold;
+	margin-left:15px;
+	display:block;
+    float:left;
+    width:150px;
+    padding: 6px;
+	padding-bottom:50px;
+}
+
+
+#box2 {
+    /*display:inline-block;*/
+	font-size:16px;
+	font-weight:bold;
+	margin-left:265px;
+	float:left;
+    width:150px;
+    padding: 6px;
+	padding-bottom:50px;
+}
+
+#box3 {
+	font-size:16px;
+	font-weight:bold;
+	position:relative;
+	float:right;
+	width:150px;
+    padding: 6px;
+	padding-bottom:50px;
+}
+
+
+#Ad-space{
+	float:left;
+	padding-top:20px;
+	padding-bottom:20px;
+	height:200px;
+	background-color:#999;
+	width:1000px;
+	}
