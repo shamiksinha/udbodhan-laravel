@@ -1,0 +1,130 @@
+﻿html, body  .no-js {
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+	background-color:#C60;
+	background:url(../images/blr-math-bg.jpg) no-repeat fixed;
+	font-size:12px;
+}
+
+.no-js #RKMlogo {
+	background-image:url(../images/RKM-logo-002.png);
+	margin-left:70px;
+	width:80px;
+	height:86px;
+}
+
+.no-js #top-bg {
+  width: 862px;
+  height: 517px;
+  background-image:url(../images/RKM-002top-bg.png);
+}
+
+.no-js #innertop  {
+  margin:0 auto;
+  /*background-color:#EDEDED;*/
+  width: 1024px;
+  height:200px;
+  background:url(../images/inner-header-new-03.png) no-repeat;
+  /*background-image:url(../images/inner-header-new-02.png) no-repeat;*/
+}
+
+.no-js #main-bg {
+	align-content: center;
+	position: inherit;
+	padding-bottom:50px;
+	padding-top:10px;
+	width:780px;
+	min-height:100%px;
+	background-image:url(../images/RKM-bg-001.png);
+	background-repeat:repeat-y;
+}
+
+.no-js #Views-BG 
+{
+  width:100%;
+  height:auto;
+  background:url(../images/editor-001.jpg) no-repeat fixed;
+  /*background-color:#EDEDED;
+  border: 1px dotted black;
+  opacity: 0.5;*/
+  color:#333;
+  font-size:12px;
+  text-align: center;
+  padding-bottom:50px;
+  padding-top:50px;
+}
+
+.no-js .left-colLogo {
+    float: left;
+	text-align: center;
+	width: 85px;
+	height: 100px;
+	background-color:#fff;
+	text-align:center;
+
+	background-position:center;
+	background-image:url(../images/RKM-logo.png)
+}
+
+.no-js .SearchImg{
+		height:123px;
+		width:128px;
+		background:url(../images/book_RKM-hover.png) no-repeat;
+}
+
+.no-js #SearchButton {
+	float:left;
+	background:url(../images/RKM-search-icon.png) no-repeat;
+	width:30px;
+	height:32px;
+	background-color:#000;
+	margin-top:2px;
+	margin-left:5px;
+    border-radius: 4px;
+	cursor:pointer;	
+}
+
+.no-js .LogoInner {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  top: -40px;
+  height: 80px;
+  width: 80px;
+  background:url(../images/RKM-logo-002.png) center center no-repeat, #f39c12;
+  border-radius: 50%;
+box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+
+}
+
+.no-js #subcrb-boxwrap, #search-boxwrap 
+{
+  width:100%;
+  height:auto;
+  background:url(../images/subscribe-bg1.jpg) no-repeat fixed;
+ /* background-color:#EDEDED;
+  border: 1px dotted black;
+  opacity: 0.5;*/
+  color:#333;
+  font-size:12px;
+  text-align: center;
+  padding-bottom:50px;
+  padding-top:50px;
+}
+
+.no-js #search-boxwrap 
+{
+  background:url(../images/e-book-bg.jpg) no-repeat fixed;
+}
+
+.no-js #Flash-Btn {
+	  width:40px;
+	  height:40px;
+	  background:url(../images/Flash-Player-Icon.png) no-repeat;
+	  float:right;
+	  margin:10px 10px 10px 10px;
+	  cursor:se-resize;
+}

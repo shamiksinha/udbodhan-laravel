@@ -5,12 +5,14 @@ namespace Laravel\Cashier;
 use Exception;
 use Carbon\Carbon;
 use InvalidArgumentException;
+use Stripe\Card as StripeCard;
 use Stripe\Token as StripeToken;
+use Illuminate\Support\Collection;
 use Stripe\Charge as StripeCharge;
 use Stripe\Refund as StripeRefund;
-use Illuminate\Support\Collection;
 use Stripe\Invoice as StripeInvoice;
 use Stripe\Customer as StripeCustomer;
+use Stripe\BankAccount as StripeBankAccount;
 use Stripe\InvoiceItem as StripeInvoiceItem;
 use Stripe\Error\InvalidRequest as StripeErrorInvalidRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -31,7 +33,7 @@ trait Billable
      * @param  array  $options
      * @return \Stripe\Charge
      *
-     * @throws \Stripe\Error\Card
+     * @throws \InvalidArgumentException
      */
     public function charge($amount, array $options = [])
     {
@@ -59,7 +61,7 @@ trait Billable
      * @param  array  $options
      * @return \Stripe\Charge
      *
-     * @throws \Stripe\Error\Refund
+     * @throws \InvalidArgumentException
      */
     public function refund($charge, array $options = [])
     {
@@ -86,7 +88,7 @@ trait Billable
      * @param  array  $options
      * @return \Stripe\InvoiceItem
      *
-     * @throws \Stripe\Error\Card
+     * @throws \InvalidArgumentException
      */
     public function tab($description, $amount, array $options = [])
     {
@@ -112,9 +114,7 @@ trait Billable
      * @param  string  $description
      * @param  int  $amount
      * @param  array  $options
-     * @return bool
-     *
-     * @throws \Stripe\Error\Card
+     * @return \Laravel\Cashier\Invoice|bool
      */
     public function invoiceFor($description, $amount, array $options = [])
     {
@@ -220,7 +220,7 @@ trait Billable
     /**
      * Invoice the billable entity outside of regular billing cycle.
      *
-     * @return StripeInvoice|bool
+     * @return \Stripe\Invoice|bool
      */
     public function invoice()
     {
@@ -289,7 +289,7 @@ trait Billable
      * Create an invoice download Response.
      *
      * @param  string  $id
-     * @param  array   $data
+     * @param  array  $data
      * @param  string  $storagePath
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -364,6 +364,24 @@ trait Billable
     }
 
     /**
+     * Get the default card for the entity.
+     *
+     * @return \Stripe\Card|null
+     */
+    public function defaultCard()
+    {
+        $customer = $this->asStripeCustomer();
+
+        foreach ($customer->sources->data as $card) {
+            if ($card->id === $customer->default_source) {
+                return $card;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Update customer's credit card.
      *
      * @param  string  $token
@@ -378,7 +396,7 @@ trait Billable
         // If the given token already has the card as their default source, we can just
         // bail out of the method now. We don't need to keep adding the same card to
         // a model's account every time we go through this particular method call.
-        if ($token->card->id === $customer->default_source) {
+        if ($token[$token->type]->id === $customer->default_source) {
             return;
         }
 
@@ -407,16 +425,7 @@ trait Billable
      */
     public function updateCardFromStripe()
     {
-        $customer = $this->asStripeCustomer();
-
-        $defaultCard = null;
-
-        foreach ($customer->sources->data as $card) {
-            if ($card->id === $customer->default_source) {
-                $defaultCard = $card;
-                break;
-            }
-        }
+        $defaultCard = $this->defaultCard();
 
         if ($defaultCard) {
             $this->fillCardDetails($defaultCard)->save();
@@ -433,13 +442,16 @@ trait Billable
     /**
      * Fills the model's properties with the source from Stripe.
      *
-     * @param \Stripe\Card|null  $card
+     * @param  \Stripe\Card|\Stripe\BankAccount|null  $card
      * @return $this
      */
     protected function fillCardDetails($card)
     {
-        if ($card) {
+        if ($card instanceof StripeCard) {
             $this->card_brand = $card->brand;
+            $this->card_last_four = $card->last4;
+        } elseif ($card instanceof StripeBankAccount) {
+            $this->card_brand = 'Bank Account';
             $this->card_last_four = $card->last4;
         }
 
@@ -525,7 +537,7 @@ trait Billable
      *
      * @param  string  $token
      * @param  array  $options
-     * @return StripeCustomer
+     * @return \Stripe\Customer
      */
     public function createAsStripeCustomer($token, array $options = [])
     {

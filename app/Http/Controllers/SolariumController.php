@@ -36,8 +36,16 @@ class SolariumController extends Controller {
 			if (array_key_exists('month',$input)){
 				$searchMonth=$input['month'];
 			}
-			/* Log::debug($input);
-			Log::debug($searchMonth); */
+			$searchBy=$request->input('searchBy');
+			$searchFilter=3;
+			if (in_array('searchAuthor',$searchBy,true) && !in_array('searchSubject',$searchBy,true)){
+				$searchFilter=1;
+			}else if (!in_array('searchAuthor',$searchBy,true) && in_array('searchSubject',$searchBy,true)){
+				$searchFilter=2;
+			}
+			Log::debug($input);
+			Log::debug($searchMonth);
+			Log::debug($searchBy);
 			$searchField=trim(str_replace('*','',$input['Search']));
 			$pattern="/ /";			
 			$searchWords=preg_split($pattern, $searchField);
@@ -106,7 +114,15 @@ class SolariumController extends Controller {
 			if (!isset($queryString)){
 				$queryString='*';	
 			}
-			$contructedQuery='author_txt_en_split:'.trim($queryString).' or subject_txt_en_split:'.trim($queryString);
+			$contructedQuery='';
+			if ($searchFilter==3){
+				$contructedQuery='author_txt_en_split:'.trim($queryString).' or subject_txt_en_split:'.trim($queryString);
+			}else if ($searchFilter==2){
+				$contructedQuery='subject_txt_en_split:'.trim($queryString);
+			} else if ($searchFilter==1){
+				$contructedQuery='author_txt_en_split:'.trim($queryString);
+			}
+			Log::debug("Constructed query".$contructedQuery);
 			$query->setQuery($contructedQuery);
 			//$query->createFilterQuery('filterByYrMonBooknum')->setQuery($fqString);
 			//$query->addFilterQuery(array('key'=>'bookname', 'query'=>'*:*'));
@@ -119,7 +135,7 @@ class SolariumController extends Controller {
 			$query->setFields(array('bookname_ws','author_txt_en_split','bookyear_i','bookmonth_txt_en_split','subject_txt_en_split'));
 			//echo 'Query:<br/>';
 			//print_r($query);
-			
+			//Log::debug($query);
 			$resultset = $client->select( $query );
 			//echo '<br/><br/> ResultSet:<br/>';
 			//print_r($resultset);

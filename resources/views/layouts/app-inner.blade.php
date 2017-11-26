@@ -210,7 +210,14 @@ h2 {
 	font-weight:bold;
 	text-shadow: 2px 2px 4px #9d9d9d;
 	}
-
+#innertop {
+  margin:0 auto;
+  /*background-color:#EDEDED;*/
+  width: 1024px;
+  height:200px;
+  background:url(../images/inner-header-new-03.webp) no-repeat;
+  /*background-image:url(../images/inner-header-new-02.png) no-repeat;*/
+}
 #Ebok-icon{
 
 	float:left;

@@ -6,6 +6,99 @@
 class="active"
 @endsection
 @section('content')
+<style>
+#SearchPanel{
+	clear:both;
+	height: 80px;
+	padding:10px;
+	}
+	
+#search-layer{
+	float:left;
+	margin-top:20px;
+	margin-left:185px;
+	text-align:left;
+	 width:auto; 
+	 height: auto;
+	
+	}
+#search-layerInsd{
+	margin-top:5px;
+	margin-left:5px;
+	 width:350px; 
+	 height: 10px;"
+	
+	}
+	.SearchImg{
+		height:123px;
+		width:128px;
+		background:url(../images/book_RKM-hover.webp) no-repeat;
+		}
+		#Search, #dropDown{
+	float:left;
+	font-size:16px;
+	color:#000;
+	margin-top:2px;
+	width:250px;
+	height:32px;
+	background-color: #FC0;
+	border: 1px dotted black;
+    opacity: 0.7;
+	padding:5px 5px 5px 5px;
+	border-radius: 4px;
+    
+	}
+#dropDown{
+	float:left;
+	background-color: transparent;
+	border: 0px dotted black;
+	padding-left:5px;
+	padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+	width:auto;
+    
+	}
+#SearchButton{
+	float:left;
+	background:url(../images/RKM-search-icon.webp) no-repeat;
+	width:30px;
+	height:32px;
+	background-color:#000;
+	margin-top:2px;
+	margin-left:5px;
+    border-radius: 4px;
+	cursor:pointer;
+	
+	}
+	
+	#sectionSbcrb, #sectionSearch, #SearchResult {
+  width: 600px;
+    background: #CAB28B;
+  padding: 0px 30px 30px 30px;
+  margin: 60px auto;
+  text-align: center;
+  border-radius: 5px;
+box-shadow: 2px 2px 5px rgba(0,0,0,.3);
+}
+
+#sectionSearch, #SearchResult
+ {
+  margin: 30px auto;
+  padding-top:20px;
+  width: 800px;
+}
+
+#SearchResult{
+	margin-top:0px;
+  background-color: #DFD6AA;
+  opacity: 0.6;
+  height:auto;
+    border-radius: 6px;
+  border: 1px dotted black;
+  box-shadow:none;
+	}
+</style>
 <div id="white-boxInside">
 	<div style="padding:20px;">
 		<div id="sectionSearch"> <span><b>To search the specific e-magazine Please insert <span class="req">Year</span>, <span class="req">Month</span> and <span class="req">Name</span> or any <span class="req">Author</span> you like. </b></span>
@@ -13,8 +106,12 @@ class="active"
 				<div id="search-layer">
 					<form id="searchform" name="searchform" method="post" action="/search">
 						{{ csrf_field() }}
-						<span id="searchfield1"> <input type="text" name="Search"
+						<span id="searchfield1" style="width:100px;"> <input type="text" name="Search"
 							id="Search" value="@isset($query){{$query}}@endisset"/> <!-- <span class="textfieldRequiredMsg">Search</span> -->
+							<!-- <input type="checkbox" name="searchBy" value="Search By Author" checked="checked">Search By Author</input>
+							<input type="checkbox" name="searchBy" value="Search By Subject" checked="checked">Search By Subject</input> -->
+							{{Form::checkbox('searchBy[]', 'searchAuthor', true, ['label'=>'Search By Author'])}}{{Form::label('searchAuthor', 'Search By Author')}}
+							{{Form::checkbox('searchBy[]', 'searchSubject', true, ['label'=>'Search By Subject'])}}{{Form::label('searchSubject', 'Search By Subject')}}
 						</span>
 
 						<div id="dropDown">
@@ -35,7 +132,21 @@ class="active"
 						</div>
 						
 						<div id="SearchButton" onclick="event.preventDefault();
-												 document.getElementById('searchform').submit();"></div>
+							var searchBy=document.getElementsByName('searchBy[]');
+							var i=0;
+							var selectedSearchFilter=false;
+							for (i = 0; i<searchBy.length; i++){
+								if (searchBy[i].type=='checkbox' && searchBy[i].checked==true){
+									selectedSearchFilter=true;
+									break;
+								}
+							}
+							if (selectedSearchFilter){
+								document.getElementById('searchform').submit();
+							}
+							else{
+								alert('Please select a search filter to search');
+							}"></div>
 						<br /> <br /> <br />
 					</form>
 				</div>
@@ -64,7 +175,7 @@ class="active"
 			</div>
 		</div>		
 		<div id="showpdf" style="display: none">
-			<div><b style="font-size:16px">এই প্রচ্ছদটি ডিজিটাল রূপান্তর</b></div>
+			<div><b style="font-size:16px"></b></div>
 			<!--<a href="#" id="back">&ldsh; Go back</a>-->
 			<div id="downloadLink" class="centerLayout"></div>
 			<br />	
