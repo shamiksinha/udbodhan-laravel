@@ -15,7 +15,7 @@
 <!--<link href="{{ asset('css/rkm-udb.css') }}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
 <noscript><link href="{{ asset('css/rkm-udb.css') }}" rel="stylesheet"></noscript>-->
 <style>
-html, body  .js {
+html.js.webp, body.js.webp {
 	font: 100% Verdana, Arial, Helvetica, sans-serif;
 	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
 	padding: 0;
@@ -23,6 +23,17 @@ html, body  .js {
 	color: #000000;
 	background-color:#C60;
 	background:url(../images/blr-math-bg.webp) no-repeat fixed;
+	font-size:12px;
+}
+
+html.no-js, html.js.no-webp, body.no-js, body.js.no-webp {
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+	background-color:#C60;
+	background:url(../images/blr-math-bg.png) no-repeat fixed;
 	font-size:12px;
 }
 
@@ -38,8 +49,15 @@ html, body, a {
  
 }
 
-.js #RKMlogo {
+.js.webp #RKMlogo {
 	background-image:url(../images/RKM-logo-002.webp);
+	margin-left:70px;
+	width:80px;
+	height:86px;
+}
+
+.no-js #RKMlogo, .js.no-webp #RKMlogo {
+	background-image:url(../images/RKM-logo-002.png);
 	margin-left:70px;
 	width:80px;
 	height:86px;
@@ -79,13 +97,19 @@ html, body, a {
 	border-radius: 4px;
 	}
 	
-.js #top-bg {
+.js.webp #top-bg {
   width: 862px;
   height: 517px;
   background-image:url(../images/RKM-002top-bg.webp);
 }
 
-.js #main-bg {
+.no-js #top-bg, .js.no-webp #top-bg {
+  width: 862px;
+  height: 517px;
+  background-image:url(../images/RKM-002top-bg.png);
+}
+
+.js.webp #main-bg {
 	align-content: center;
 	position: inherit;
 	padding-bottom:50px;
@@ -93,6 +117,17 @@ html, body, a {
 	width:780px;
 	min-height:100%px;
 	background-image:url(../images/RKM-bg-001.webp);
+	background-repeat:repeat-y;
+}
+
+.no-js #main-bg, .js.no-webp #main-bg {
+	align-content: center;
+	position: inherit;
+	padding-bottom:50px;
+	padding-top:10px;
+	width:780px;
+	min-height:100%px;
+	background-image:url(../images/RKM-bg-001.png);
 	background-repeat:repeat-y;
 }
 
@@ -210,13 +245,22 @@ h2 {
 	font-weight:bold;
 	text-shadow: 2px 2px 4px #9d9d9d;
 	}
-#innertop {
+.js.webp #innertop {
   margin:0 auto;
   /*background-color:#EDEDED;*/
   width: 1024px;
   height:200px;
   background:url(../images/inner-header-new-03.webp) no-repeat;
   /*background-image:url(../images/inner-header-new-02.png) no-repeat;*/
+}
+
+.no-js #innertop, .js.no-webp #innertop {
+  margin:0 auto;
+  /*background-color:#EDEDED;*/
+  width: 1024px;
+  height:200px;
+  /*background:url(../images/inner-header-new-03.webp) no-repeat;*/
+  background:url(../images/inner-header-new-03.png) no-repeat;
 }
 #Ebok-icon{
 
@@ -329,6 +373,17 @@ a {
 a:hover {
   color: #FC0;
 }
+#white-boxInside {
+  width:100%;
+  height:auto;
+  background-color:#EDEDED;
+  color:#333;
+  font-size:12px;
+  text-align: center;
+  padding-bottom:50px;
+  padding-top:50px;
+
+}
 </style>
 <!-- Scripts -->
 <script>
@@ -433,8 +488,11 @@ a:hover {
 					</ul>
 				</div>
 				<div id="Inner-socialMedia">
-					<img src="{{asset('images/social-mda-icons.png')}}" border="0"
-						usemap="#Map" />
+					<picture>
+						<source srcset="{{asset('images/social-mda-icons.webp')}}" type="image/webp" border="0" usemap="#Map">
+						<source srcset="{{asset('images/social-mda-icons.png')}}" type="image/png" border="0" usemap="#Map">
+						<img src="{{asset('images/social-mda-icons.png')}}" border="0" usemap="#Map" alt="socialMedia"/>
+					</picture>
 					<map name="Map" id="Map">
 						<area shape="circle" coords="16,2,2" href="#" />
 						<area shape="rect" coords="-10,0,30,38" href="#" />

@@ -49,3 +49,15 @@ Route::get('/subscribe', 'SubscribeController@showSubscribeForm');/*function () 
 });*/
 
 Route::post('/subscribe', 'SubscribeController@subscribe');
+
+Route::resource('showpdf', 'PdfController' , ['only' => [
+		'show'
+]]);
+
+Route::get('showswf/{bookName}', 'PdfController@showSwf');
+
+Route::get('/download/{bookName}', 'PdfController@download');
+
+Route::get("/showSelectedPdf/{bookName}",function($id){
+	return view('showSearchPDF')->with('bookName',$id)->with('bookPath','pdf/'.$id);//);
+});

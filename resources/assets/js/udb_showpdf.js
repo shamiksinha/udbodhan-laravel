@@ -12,7 +12,7 @@ $(".books").click(function(){
 	 	//$("#swfdoc").html('<p>'+id+'</p>');
 	 	//$("#showpdf").append('<p>'+id+'</p>');
 	 	$("#showpdf").css('display','inline-block');
-	 	//$("#searchResult").css('display','none');
+	 	$("#SearchResult").css('display','none');
 		$("#box").css('float');
 
 	 	var bookname=id.split('.')[0];
@@ -23,7 +23,7 @@ $(".books").click(function(){
 $("#back").click(function(){
 	event.preventDefault();
 	$("#showpdf").css('display','none');
- 	$("#searchResult").css('display','inline-block');
+ 	$("#SearchResult").css('display','inline-block');
 });
 $("#Search").keypress(function(event){
 	var keyascii=event.which;

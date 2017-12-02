@@ -7,11 +7,11 @@ use Carbon\Carbon;
 class SubscriptionBuilder
 {
     /**
-     * The model that is subscribing.
+     * The user model that is subscribing.
      *
      * @var \Illuminate\Database\Eloquent\Model
      */
-    protected $owner;
+    protected $user;
 
     /**
      * The name of the subscription.
@@ -35,11 +35,11 @@ class SubscriptionBuilder
     protected $quantity = 1;
 
     /**
-     * The date and time the trial will expire.
+     * The number of trial days to apply to the subscription.
      *
-     * @var \Carbon\Carbon
+     * @var int|null
      */
-    protected $trialExpires;
+    protected $trialDays;
 
     /**
      * Indicates that the trial should end immediately.
@@ -65,16 +65,16 @@ class SubscriptionBuilder
     /**
      * Create a new subscription builder instance.
      *
-     * @param  mixed  $owner
+     * @param  mixed  $user
      * @param  string  $name
      * @param  string  $plan
      * @return void
      */
-    public function __construct($owner, $name, $plan)
+    public function __construct($user, $name, $plan)
     {
+        $this->user = $user;
         $this->name = $name;
         $this->plan = $plan;
-        $this->owner = $owner;
     }
 
     /**
@@ -91,27 +91,14 @@ class SubscriptionBuilder
     }
 
     /**
-     * Specify the number of days of the trial.
+     * Specify the ending date of the trial.
      *
      * @param  int  $trialDays
      * @return $this
      */
     public function trialDays($trialDays)
     {
-        $this->trialExpires = Carbon::now()->addDays($trialDays);
-
-        return $this;
-    }
-
-    /**
-     * Specify the ending date of the trial.
-     *
-     * @param  \Carbon\Carbon  $trialUntil
-     * @return $this
-     */
-    public function trialUntil(Carbon $trialUntil)
-    {
-        $this->trialExpires = $trialUntil;
+        $this->trialDays = $trialDays;
 
         return $this;
     }
@@ -155,7 +142,7 @@ class SubscriptionBuilder
     }
 
     /**
-     * Add a new Stripe subscription to the Stripe model.
+     * Add a new Stripe subscription to the user.
      *
      * @param  array  $options
      * @return \Laravel\Cashier\Subscription
@@ -181,10 +168,10 @@ class SubscriptionBuilder
         if ($this->skipTrial) {
             $trialEndsAt = null;
         } else {
-            $trialEndsAt = $this->trialExpires;
+            $trialEndsAt = $this->trialDays ? Carbon::now()->addDays($this->trialDays) : null;
         }
 
-        return $this->owner->subscriptions()->create([
+        return $this->user->subscriptions()->create([
             'name' => $this->name,
             'stripe_id' => $subscription->id,
             'stripe_plan' => $this->plan,
@@ -203,13 +190,15 @@ class SubscriptionBuilder
      */
     protected function getStripeCustomer($token = null, array $options = [])
     {
-        if (! $this->owner->stripe_id) {
-            $customer = $this->owner->createAsStripeCustomer($token, $options);
+        if (! $this->user->stripe_id) {
+            $customer = $this->user->createAsStripeCustomer(
+                $token, array_merge($options, array_filter(['coupon' => $this->coupon]))
+            );
         } else {
-            $customer = $this->owner->asStripeCustomer();
+            $customer = $this->user->asStripeCustomer();
 
             if ($token) {
-                $this->owner->updateCard($token);
+                $this->user->updateCard($token);
             }
         }
 
@@ -244,8 +233,8 @@ class SubscriptionBuilder
             return 'now';
         }
 
-        if ($this->trialExpires) {
-            return $this->trialExpires->getTimestamp();
+        if ($this->trialDays) {
+            return Carbon::now()->addDays($this->trialDays)->getTimestamp();
         }
     }
 
@@ -256,7 +245,7 @@ class SubscriptionBuilder
      */
     protected function getTaxPercentageForPayload()
     {
-        if ($taxPercentage = $this->owner->taxPercentage()) {
+        if ($taxPercentage = $this->user->taxPercentage()) {
             return $taxPercentage;
         }
     }
