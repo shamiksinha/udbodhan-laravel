@@ -6,6 +6,53 @@ class="active"
 <div class="InsideSubTitle">100 years e-Book for You</div>
 @endsection
 @section('content')
+<style>
+.js.webp .LogoInner {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  top: -40px;
+  height: 80px;
+  width: 80px;
+  background:url(../images/RKM-logo-002.webp) center center no-repeat, #f39c12;
+  border-radius: 50%;
+box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+
+}
+
+.no-js .LogoInner, .js.no-webp .LogoInner {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  top: -40px;
+  height: 80px;
+  width: 80px;
+  background:url(../images/RKM-logo-002.png) center center no-repeat, #f39c12;
+  border-radius: 50%;
+box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+
+}
+button, .subscrb, .Downld-btn {
+  width: 100%;
+  height: 30px;
+  border: none;
+ background: #d35400;
+  color: #ecf0f1;
+  font-weight: 100;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  transition: all ease-in-out .2s;
+  border-bottom: 3px solid #666;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  background: #666;
+}
+</style>
 <div id="white-boxInside">
 	<section>
 	<div class="LogoInner"></div>

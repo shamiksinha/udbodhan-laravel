@@ -29,10 +29,16 @@ class="active"
 	 height: 10px;"
 	
 	}
-	.SearchImg{
+	.js.webp .SearchImg{
 		height:123px;
 		width:128px;
 		background:url(../images/book_RKM-hover.webp) no-repeat;
+		}
+		
+	.no-js .SearchImg, .js.no-webp .SearchImg{
+		height:123px;
+		width:128px;
+		background:url(../images/book_RKM-hover.png) no-repeat;
 		}
 		#Search, #dropDown{
 	float:left;
@@ -59,9 +65,22 @@ class="active"
 	width:auto;
     
 	}
-#SearchButton{
+.js.webp #SearchButton{
 	float:left;
 	background:url(../images/RKM-search-icon.webp) no-repeat;
+	width:30px;
+	height:32px;
+	background-color:#000;
+	margin-top:2px;
+	margin-left:5px;
+    border-radius: 4px;
+	cursor:pointer;
+	
+	}
+	
+	.no-js #SearchButton, .js.no-webp #SearchButton{
+	float:left;
+	background:url(../images/RKM-search-icon.png) no-repeat;
 	width:30px;
 	height:32px;
 	background-color:#000;
@@ -92,12 +111,14 @@ box-shadow: 2px 2px 5px rgba(0,0,0,.3);
 #SearchResult{
 	margin-top:0px;
   background-color: #DFD6AA;
-  opacity: 0.6;
+  /*opacity: 0.6;*/
   height:auto;
     border-radius: 6px;
   border: 1px dotted black;
   box-shadow:none;
 	}
+	
+#SearchResult table{border-spacing:0 10px}
 </style>
 <div id="white-boxInside">
 	<div style="padding:20px;">
@@ -160,23 +181,35 @@ box-shadow: 2px 2px 5px rgba(0,0,0,.3);
 					<h2>
 						The Search results @if(isset($query)) for your query <b> {{ $query }} </b> @endif @if(isset($months)) for the months of <b> @foreach ($months as $index=>$month) {{$month }} @if (count($months)>($index+1)) , @endif @endforeach </b> @endif are :
 					</h2>
-						@if(isset($results))
-							@php ($facets=$results->getFacetSet()->getFacets()['bookname'])
-							@php ($i=1)
-							@foreach ($facets as $bookname=>$count)
-								<a href="#" class="books" id="{{ $bookname }}">{{ $bookname }}</a>
-								@if (count($facets)>$i)
-									,
-								@endif
-								@php ($i=$i+1)			
-							@endforeach
-						@endif					
+						{{$paginator ->appends([
+							'Search'=>Input::get('Search'),
+							'month'=>Input::get('month'),
+							'searchBy'=>Input::get('searchBy')
+						])->links()}}
+						@foreach($results as $bookName=>$bookDetails)
+							@php
+								$count=count($bookDetails['author'])
+							@endphp
+							<a href="/showSelectedPdf/{{$bookName}}" class="book" id="{{$bookName}}">{{$bookName}}</a> has {{$count}} records<br>
+							<div align="center">
+								<table>
+									<tr><th>AUTHOR</th><th>SUBJECT</th></tr>
+									@for ($i=0;$i<$count;$i++)
+										<tr><td>{{$bookDetails['author'][$i]}}</td><td>{{$bookDetails['subject'][$i]}}</td></tr>
+									@endfor
+								</table>
+							</div>
+							@if (!$loop->last)
+								<hr/>
+							@endif
+						@endforeach
+						{{$paginator->links('pagination.default', ['paginator' => $paginator])}}					
 				<!-- </div> -->
 			</div>
 		</div>		
 		<div id="showpdf" style="display: none">
 			<div><b style="font-size:16px"></b></div>
-			<!--<a href="#" id="back">&ldsh; Go back</a>-->
+			<a href="#" id="back">&ldsh; Go back</a>
 			<div id="downloadLink" class="centerLayout"></div>
 			<br />	
 			<div id="Display-box" style="margin-top:10px">

@@ -3,6 +3,7 @@
 class="active"
 @endsection
 @section('content')
+
 <!-- <div class="container">-->
 <div id="white-boxInside">
     <div class="row">

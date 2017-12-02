@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subscription extends Model
 {
     /**
-     * The attributes that are not mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array
      */
@@ -45,21 +45,9 @@ class Subscription extends Model
      */
     public function user()
     {
-        return $this->owner();
-    }
+        $model = getenv('STRIPE_MODEL') ?: config('services.stripe.model', 'User');
 
-    /**
-     * Get the model related to the subscription.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function owner()
-    {
-        $model = getenv('STRIPE_MODEL') ?: config('services.stripe.model', 'App\\User');
-
-        $model = new $model;
-
-        return $this->belongsTo(get_class($model), $model->getForeignKey());
+        return $this->belongsTo($model, 'user_id');
     }
 
     /**
@@ -100,7 +88,7 @@ class Subscription extends Model
     public function onTrial()
     {
         if (! is_null($this->trial_ends_at)) {
-            return Carbon::now()->lt($this->trial_ends_at);
+            return Carbon::today()->lt($this->trial_ends_at);
         } else {
             return false;
         }
@@ -174,8 +162,6 @@ class Subscription extends Model
 
         $subscription->quantity = $quantity;
 
-        $subscription->prorate = $this->prorate;
-
         $subscription->save();
 
         $this->quantity = $quantity;
@@ -200,7 +186,7 @@ class Subscription extends Model
     /**
      * Change the billing cycle anchor on a plan change.
      *
-     * @param  \DateTimeInterface|int|string  $date
+     * @param  int|string  $date
      * @return $this
      */
     public function anchorBillingCycleOn($date = 'now')
@@ -210,20 +196,6 @@ class Subscription extends Model
         }
 
         $this->billingCycleAnchor = $date;
-
-        return $this;
-    }
-
-    /**
-     * Force the trial to end immediately.
-     *
-     * This method must be combined with swap, resume, etc.
-     *
-     * @return $this
-     */
-    public function skipTrial()
-    {
-        $this->trial_ends_at = null;
 
         return $this;
     }
@@ -367,17 +339,9 @@ class Subscription extends Model
      * Get the subscription as a Stripe subscription object.
      *
      * @return \Stripe\Subscription
-     *
-     * @throws \LogicException
      */
     public function asStripeSubscription()
     {
-        $subscriptions = $this->user->asStripeCustomer()->subscriptions;
-
-        if (! $subscriptions) {
-            throw new LogicException('The Stripe customer does not have any subscriptions.');
-        }
-
-        return $subscriptions->retrieve($this->stripe_id);
+        return $this->user->asStripeCustomer()->subscriptions->retrieve($this->stripe_id);
     }
 }

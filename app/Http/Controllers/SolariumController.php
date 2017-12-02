@@ -6,6 +6,8 @@ use Solarium\Client;
 use Solarium\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\BookData;
 
 class SolariumController extends Controller {
 	protected $client;
@@ -37,15 +39,16 @@ class SolariumController extends Controller {
 				$searchMonth=$input['month'];
 			}
 			$searchBy=$request->input('searchBy');
+			Log::debug(print_r($searchBy,true));
 			$searchFilter=3;
 			if (in_array('searchAuthor',$searchBy,true) && !in_array('searchSubject',$searchBy,true)){
 				$searchFilter=1;
 			}else if (!in_array('searchAuthor',$searchBy,true) && in_array('searchSubject',$searchBy,true)){
 				$searchFilter=2;
 			}
-			Log::debug($input);
-			Log::debug($searchMonth);
-			Log::debug($searchBy);
+			//Log::debug($input);
+			//Log::debug($searchMonth);
+			//Log::debug($searchBy);
 			$searchField=trim(str_replace('*','',$input['Search']));
 			$pattern="/ /";			
 			$searchWords=preg_split($pattern, $searchField);
@@ -122,7 +125,7 @@ class SolariumController extends Controller {
 			} else if ($searchFilter==1){
 				$contructedQuery='author_txt_en_split:'.trim($queryString);
 			}
-			Log::debug("Constructed query".$contructedQuery);
+			//Log::debug("Constructed query".$contructedQuery);
 			$query->setQuery($contructedQuery);
 			//$query->createFilterQuery('filterByYrMonBooknum')->setQuery($fqString);
 			//$query->addFilterQuery(array('key'=>'bookname', 'query'=>'*:*'));
@@ -137,6 +140,32 @@ class SolariumController extends Controller {
 			//print_r($query);
 			//Log::debug($query);
 			$resultset = $client->select( $query );
+			Log::debug("Results ", ["Num Of Docs"=>$resultset->getNumFound()]);
+			Log::debug("Results ", ["Docs"=>$resultset->getDocuments()]);
+			Log::debug("Results ", ["Docs"=>$resultset->getDocuments()]);
+			$facetedResults=array();
+			$facets=$resultset->getFacetSet()->getFacets()['bookname'];
+			$query->setRows(100);
+			Log::info(print_r($query, true));
+			foreach ($facets as $bookname=>$count){
+				$query->createFilterQuery('filterByBookName')->setQuery('bookname_ws:'.$bookname);				
+				$filteredBookResults = $client->select( $query );				
+				$facetedResults[$bookname]['author']=array();
+				$facetedResults[$bookname]['subject']=array();
+				foreach ($filteredBookResults as $document){
+					$facetedResults[$bookname]['author'][]=$document['author_txt_en_split'];
+					$facetedResults[$bookname]['subject'][]=$document['subject_txt_en_split'];
+				}
+				$query->removeFilterQuery('filterByBookName');
+			}
+			//Log::info(print_r($facetedResults, true));
+			//$request->session()->put('facetedResults', $facetedResults);
+			$collectedResults=collect($facetedResults);
+			$paginator=new LengthAwarePaginator($collectedResults,count($facetedResults),10, $request->query->get('page',1));
+			$paginator->setPath('search');			
+			$request->session()->put('collectedResults', $collectedResults);
+			//Log::info(print_r($paginator, true));
+			//Log::info(print_r($collectedResults->forPage(1, 10), true));
 			//echo '<br/><br/> ResultSet:<br/>';
 			//print_r($resultset);
 			// display the total number of documents found by solr
@@ -194,7 +223,22 @@ class SolariumController extends Controller {
 					}
 				}
 			} */
-			return view('search')->with(['results'=>$resultset])->with('query',$input['Search'])->with('months',$searchMonth);
+			return view('search')->with(['results'=>$collectedResults->forPage($request->query->get('page',1), 10)])->with('query',$input['Search'])->with('months',$searchMonth)->with('paginator',$paginator)->with('elements',$paginator->items());
+		}
+		if ($request->getMethod() == Request::METHOD_GET && null != ($request->query->get('page'))){
+			$collectedResults=$request->session()->get('collectedResults');
+			$paginator=new LengthAwarePaginator($collectedResults,count($collectedResults),10, $request->query->get('page',1));
+			$paginator->setPath('search');
+			$resultset=$paginator;
+			$input = $request->query();
+			$searchMonth=array();
+			if (array_key_exists('month',$input)){
+				$searchMonth=$input['month'];
+			}
+			//Log::info(print_r($paginator, true));
+			//$collectedResults=collect($facetedResults);
+			//Log::info(print_r($collectedResults->forPage($request->query->get('page',1), 10), true));
+			return view('search')->with(['results'=>$collectedResults->forPage($request->query->get('page',1), 10)])->with('query',$input['Search'])->with('months',$searchMonth)->with('paginator',$paginator)->with('elements',$paginator->items());
 		}
 		if ($request->getMethod () == Request::METHOD_GET) {
 			return view('search');
