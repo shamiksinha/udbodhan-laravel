@@ -18,7 +18,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ]; */
     protected $fillable = [
-    		'firstname', 'lastname', 'email', 'password',
+    		'firstname', 'lastname', 'email', 'password','avatar', 'provider_id', 'provider','access_token'
     ];
 
     /**
@@ -29,4 +29,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function books(){
+        return $this->belongsToMany('App\Model\UserBook');
+    }
+
+    public function paymentRequests(){
+        return $this->belongsToMany('App\Model\PaymentRequest','email','email');
+    }
 }
