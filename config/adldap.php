@@ -34,7 +34,7 @@ return [
             |
             */
 
-            'auto_connect' => true,
+            'auto_connect' => env('ADLDAP_AUTO_CONNECT',true),
 
             /*
             |--------------------------------------------------------------------------
@@ -63,7 +63,8 @@ return [
             |
             */
 
-            'schema' => Adldap\Schemas\ActiveDirectory::class,
+            //'schema' => Adldap\Schemas\ActiveDirectory::class,
+            'schema' => Adldap\Schemas\OpenLDAP::class,
 
             /*
             |--------------------------------------------------------------------------
@@ -172,6 +173,7 @@ return [
                 |
                 */
 
+                'admin_account_prefix' => env('ADLDAP_ADMIN_ACCOUNT_PREFIX', ''),
                 'admin_account_suffix' => env('ADLDAP_ADMIN_ACCOUNT_SUFFIX', ''),
 
                 /*

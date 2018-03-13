@@ -359,6 +359,7 @@ a:hover {
 }
 </style>
 
+
 <!-- Scripts -->
 <script type="text/javascript">
         window.Laravel = {!! json_encode([
@@ -454,7 +455,7 @@ a:hover {
 
 								<form id="logout-form" action="{{ route('logout') }}"
 									method="POST" style="display: none;">{{ csrf_field() }}</form></li>
-							<li><a id="profile" href="#"> {{ Auth::user()->name }}</a> <!-- </ul></li> -->
+							<!--<li><a id="profile" href="#"> {{ Auth::user()->name }}</a> --><!-- </ul></li> -->
 						@endif
 					
 					</ul>
@@ -466,12 +467,12 @@ a:hover {
 						<img src="{{asset('images/social-mda-icons.png')}}" border="0" usemap="#Map" alt="socialMedia"/>
 					</picture>
 					<map name="Map" id="Map">
-						<area shape="circle" coords="16,2,2" href="#" />
-						<area shape="rect" coords="-10,0,30,38" href="#" />
-						<area shape="rect" coords="28,0,61,32" href="#" />
-						<area shape="rect" coords="60,0,97,41" href="#" />
-						<area shape="rect" coords="97,0,128,37" href="#" />
-						<area shape="rect" coords="128,0,161,25" href="#" />
+						<!--<area shape="circle" coords="16,2,2" href="{{ route('social.oauth', 'facebook') }}" />-->
+						<area shape="rect" coords="-10,0,30,38" href="{{ route('social.oauth', 'facebook') }}" />
+						<area shape="rect" coords="28,0,61,32" href="{{ route('social.oauth', 'google') }}" />
+						<area shape="rect" coords="60,0,97,41" href="{{ route('social.oauth', 'google') }}" />
+						<area shape="rect" coords="97,0,128,37" href="{{ route('social.oauth', 'linkedin') }}" />
+						<area shape="rect" coords="128,0,161,25" href="{{ route('social.oauth', 'twitter') }}" />
 					</map>
 				</div>
 			</nav>

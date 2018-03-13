@@ -186,6 +186,9 @@ return [
     	 * Register Html Service provider
     	 */
     	Collective\Html\HtmlServiceProvider::class,
+		App\Providers\ReadCsvServiceProvider::class,
+		Laravel\Socialite\SocialiteServiceProvider::class,
+    	App\Providers\InstaMojoServiceProvider::class,
     ],
 
     /*
@@ -237,6 +240,9 @@ return [
     	'Form' => Collective\Html\FormFacade::class,
     	'Html' => Collective\Html\HtmlFacade::class,
     	'Input' => Illuminate\Support\Facades\Input::class,
+		'ReadCsv' => App\ReadCsvFacade::class,
+		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+    	'Instamojo' => App\InstamojoFacade::class,
     ],
 
 ];
