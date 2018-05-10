@@ -27,7 +27,7 @@ $("#back").click(function(){
 });
 $("#Search").keypress(function(event){
 	var keyascii=event.which;
-	if ( keyascii<32){
+	if (keyascii<32){
 		event.preventDefault();
 	} else if (keyascii>32 && keyascii<42 ){
 		event.preventDefault();

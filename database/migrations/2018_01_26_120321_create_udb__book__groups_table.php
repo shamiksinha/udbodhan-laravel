@@ -3,10 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
-use App\UdbBookGroup;
-use App\ReadCsvFacade;
+
 
 class CreateUdbBookGroupsTable extends Migration
 {
@@ -23,12 +20,16 @@ class CreateUdbBookGroupsTable extends Migration
 			$table->tinyInteger('books_in_group')->unsigned();
 			$table->string('start_book_id', 8);
 			$table->string('end_book_id', 8);
-			$table->decimal('price', 16,6);
+			$table->smallInteger('no_of_issues')->unsigned();
+			$table->decimal('price_per_issue', 16,6);
+			$table->decimal('actual_price', 16,6);
+			$table->decimal('discount', 16,4)->unsigned;
+			$table->decimal('final_price', 16,6);
             $table->timestamps();
 			$table->softDeletes();
 			$table->primary('group_id');
         });
-		Log::info(getcwd() . "\n");
+		/*Log::info(getcwd() . "\n");
 		$currDir='./'.Storage::url('app/');
 		$currFile=$currDir.'GroupDetails.csv';
 		Log::info("File Exists? ".file_exists($currFile));
@@ -43,7 +44,7 @@ class CreateUdbBookGroupsTable extends Migration
 				$udbBookGroup->price = $groupDetailRow ['price'];
 				$udbBookGroup->save();
 			}
-		}
+		}*/
     }
 
     /**

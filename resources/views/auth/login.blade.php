@@ -51,8 +51,9 @@ button:hover {
   background: #666;
 }
 
-.col-md-6 .col-md-8{
-	padding-top: 50px;
+.col-md-6, .col-md-8{
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 </style>
 <!-- <div class="container">-->

@@ -79,7 +79,11 @@ button:hover {
 		<div style="padding: 20px;">
 			<div id="SubTitleDiv">Enjoy ebook</div>
 			<span id="Flash-Btn"></span>
-			<a href="/download/{{$bookName}}"><div class="Downld-btn">DOWNLOAD PDF</div></a>
+			<form action="/download">
+				{!!Form::hidden('bookName',$bookName)!!}
+				<!--<a href="/download/{{$bookName}}"><div class="Downld-btn">DOWNLOAD PDF</div></a>-->
+				<button type="submit" class="Downld-btn">DOWNLOAD PDF</button>
+			</form>
 			<div id="Display-box">				
 				<object data="{{url('swf/'.explode('.', $bookName)[0].'.swf')}}" height="1198px" width="100%"/>
 			</div>

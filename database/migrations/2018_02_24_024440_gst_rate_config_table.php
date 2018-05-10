@@ -14,16 +14,13 @@ class GstRateConfigTable extends Migration
      */
     public function up()
     {
+		Schema::dropIfExists('gst_rate_configs');
         Schema::create('gst_rate_configs', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('rate', 14,6);
 			$table->softDeletes();
             $table->timestamps();
-        });
-		
-		$gstRateConfig = new GstRateConfig();
-		$gstRateConfig->rate=0.1875;
-		$gstRateConfig->save();
+        });	
     }
 
     /**
@@ -33,6 +30,6 @@ class GstRateConfigTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('gst_rate_configs');
     }
 }

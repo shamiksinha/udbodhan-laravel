@@ -11,4 +11,5 @@ npm-debug*.log*
 /.settings
 .buildpath
 .project
-vendor/*
+/vendor
+/node_modules

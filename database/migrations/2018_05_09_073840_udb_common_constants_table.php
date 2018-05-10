@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Role extends Migration
+class UdbCommonConstantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class Role extends Migration
      */
     public function up()
     {
-       Schema::create('udb_roles', function (Blueprint $table) {
+		Schema::dropIfExists('udb_common_constants');
+        Schema::create('udb_common_constants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('udb_role_name');
+			$table->string('attribute_module');
+			$table->string('attribute_key');
+			$table->string('attribute_value');
+			$table->softDeletes();
             $table->timestamps();
-        });
+        });	
     }
 
     /**
@@ -27,6 +31,6 @@ class Role extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('udb_roles');
+        Schema::dropIfExists('udb_common_constants');
     }
 }
