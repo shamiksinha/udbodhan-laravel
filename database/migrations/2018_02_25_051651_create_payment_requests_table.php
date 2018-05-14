@@ -18,7 +18,6 @@ class CreatePaymentRequestsTable extends Migration
             $table->string('payment_request_id');
             $table->string('payment_id')->nullable();
             $table->string('group_id')->nullable();
-			$table->string('book_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('email');
             $table->string('buyer_name');

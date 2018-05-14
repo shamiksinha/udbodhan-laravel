@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Model\UdbBookGroup;
+use App\Model\UserGroup;
+use App\Model\UdbBookDetail;
+use App\Model\UserBook;
 
-class UserSeeder extends Seeder
+class PaymentDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +18,7 @@ class UserSeeder extends Seeder
       factory(App\Model\PaymentRequest::class,10)->create()->each(function($paymentRequest){
 		  $groupId=$paymentRequest->group_id;
 		  $userId=$paymentRequest->user_id;
-		  $userEmail=$paymentRequest->user_email;
+		  $userEmail=$paymentRequest->email;
 		  $udbBookGroup=UdbBookGroup::where('group_id','=',$groupId)->with('startBook')->with('endBook')->firstOrFail();
 		  $startBook=$udbBookGroup->startBook->book_id;
 		  $endBook=$udbBookGroup->endBook->book_id;

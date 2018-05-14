@@ -13,9 +13,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Model\PaymentRequest::class, function (Faker\Generator $faker) {
+	$user=factory(App\Model\User::class)->create();
     return [
         'payment_request_id' => $faker->md5,
-        'email' => $faker->safeEmail,
+        'email' => $user->email,
         'buyer_name' => $faker->name,
         'amount' => $faker->numberBetween(10,5000),
 		'purpose' => $faker->text(100),
@@ -26,14 +27,25 @@ $factory->define(App\Model\PaymentRequest::class, function (Faker\Generator $fak
 		'payment_req_modified_at' => $faker->iso8601,
 		'allow_repeated_payments' => false,
 		'group_id' => $faker->randomElement(['GRP002','GRP008',]),
+		'user_id' => $user->id,
+    ];
+});
+
+$factory->define(App\Model\User::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'firstname' => $faker->firstName,
+		'lastname' => $faker->lastName,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        //'remember_token' => str_random(10),
     ];
 });
 
 
 $factory->define(App\Model\UserBook::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => 1,
-        'user_email' => 'shamikchand002@gmail.com',
         'book_id' => $faker->numberBetween(10,5000),
 		'book_name' => $faker->text(100),
 		'book_month' => $faker->randomElement(['Pending','Sent','Failed','Completed']),

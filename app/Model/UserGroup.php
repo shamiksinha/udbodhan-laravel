@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserGroup extends Model
 {
+	protected $fillable = [
+    		'user_id', 'user_email', 'group_id', 'books_in_group','start_book_id', 'end_book_id',
+    ];
+	
     public function user(){
 		return $this->belongsTo('App\User');
 	}

@@ -67,8 +67,8 @@ class BuyBookController extends Controller {
 			$headers = array(
                 'Content-Type' => 'application/octet-stream',
             );
-			$zipFilePath=Storage::url('app/pdf/zip');
-			return response()->download($zipFilePath,groupFileDownloads($userGroup),$headers);
+			$zipFileToDownload=BuyBookController::groupFileDownloads($userGroup);
+			return Storage::disk('public')->download($zipFileToDownload,basename($zipFileToDownload),$headers);
 		}
 	}
 	
@@ -211,25 +211,46 @@ class BuyBookController extends Controller {
 	}
 	
 	public function groupFileDownloads(UserGroup $userGroup) {
-		$pdfFilePath=Storage::url('app/pdf/');
-		$zipFilePath=Storage::url('app/pdf/zip');
+		$currDir=getcwd();
+		//Log::info(getcwd() . "\n");
+		//Log::info(asset('storage/pdf/UDB-001-1305-06-01-01-MAGH.pdf') . "\n");
+		$pdfFilePath='pdf/';		
 		$zipFile=new ZipArchive;
+		$udbBookGroup=UdbBookGroup::where('group_id','=',$userGroup->group_id)->first();
 		$startBookName=$udbBookGroup->startBook->book_name;
 		$startBookNameParts=explode('-',$startBookName);
 		$zipFileName=implode('-',['UDB',$startBookNameParts[1],$startBookNameParts[2]]).'.zip';
-		if ($zipFile->open($zipFilePath . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {
+		Log::info('Zip File Name '.$zipFileName);
+		$zipFilePath='pdf/zip/'.$zipFileName;
+		Log::info('Zip File path '.$zipFilePath);
+		if ($zipFile->open('storage/'.$zipFilePath, ZipArchive::CREATE|ZipArchive::OVERWRITE) === TRUE) {
+			Log::info('Creating zip file under '.$zipFilePath);
 			$startBook=$udbBookGroup->startBook->book_id;
 			$endBook=$udbBookGroup->endBook->book_id;			
 			$udbBooksSubscribedTo=UdbBookDetail::where('deleted_at','=',null)->where('book_id','>=',$startBook)->where('book_id','<=',$endBook)->get();
 			foreach ($udbBooksSubscribedTo as $key=>$udbBookSubscribedTo){
-				$zipFile->addFile($pdfFilePath,$udbBookSubscribedTo->book_name);
+				$fileToAdd=$pdfFilePath.$udbBookSubscribedTo->book_name;
+				if(Storage::disk('public')->exists($fileToAdd)){
+					//Log::info('Url to pdf file '.Storage::disk('public')->url($fileToAdd));
+					if($zipFile->addFile('storage/'.$fileToAdd,$udbBookSubscribedTo->book_name)){
+						Log::info($fileToAdd.' has been added to zip');
+					} else {
+						Log::info($fileToAdd.' has not been added to zip');
+					}
+				}else{
+					Log::error($fileToAdd.' does not exist');
+				}
 			}
-			$zipFile->close();
+			if($zipFile->close()){
+				Log::info('Zip file '.$zipFilePath.' has been created and placed');
+			}else{
+				Log::info('Zip file '.$zipFilePath.' has not been created and placed');
+			}
 		}
-		return Storage::url($zipFileName);	
+		return $zipFilePath;	
 	}
 	
-	private function getCommonConstantData($moduleName,$attributeKey){
+	public static function getCommonConstantData($moduleName,$attributeKey){
 		return UdbCommonConstant::where('deleted_at','=',null)->where('attribute_module','=',$moduleName)->where('attribute_key','=',$attributeKey)->select('attribute_value')->first()['attribute_value'];
 	}
 }

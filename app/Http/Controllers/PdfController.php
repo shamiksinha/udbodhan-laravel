@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Model\UdbBookDetail;
+use App\Model\UserBook;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PdfController extends Controller
 {
@@ -107,23 +110,30 @@ class PdfController extends Controller
     }
 	
 	public function downloadBook(Request $request){
+		Log::info('Method '.$request->getMethod ());
 		if ($request->getMethod () == Request::METHOD_POST){
-			$userBook=UserBook::where('book_name','=',$request->input('bookName'))->first();
+			Log::info('Book Name '.$request->input('bookName'));
+			Log::info('User Id '.Auth::user()->id);
+			$userBook=UserBook::where('book_name','=',$request->input('bookName'))->where('user_id','=',Auth::user()->id)->first();
+			Log::info('Book is already bought? '.$userBook);
 			if (!isset($userBook)){
-				$price=10.00;
+				$price=floatval(BuyBookController::getCommonConstantData('UDB_SUBSCRIPTION','PRICE_PER_BOOK'));
 				Log::info("Payable=".$price);
-				$gstRate=GstRateConfig::where('deleted_at','=',null)->get()->pluck('rate')->first();
+				$gstRate=floatval(BuyBookController::getCommonConstantData('UDB_SUBSCRIPTION','GST_RATE'));
 				Log::info("GST=".$gstRate);
+				$intamojoRate=floatval(BuyBookController::getCommonConstantData('UDB_SUBSCRIPTION','PAYMENTGATEWAY_RATE'));
+				Log::info("Transaction Charges Rate=".$intamojoRate);
+				$intamojoConstant=floatval(BuyBookController::getCommonConstantData('UDB_SUBSCRIPTION','PAYMENTGATEWAY_CONSTANT'));
 				$gstRate=1+$gstRate;
-				$doubleGst=2*$gstRate;
-				$tripleGst=3*$gstRate;
-				$tax=(100*(($price+$tripleGst)/(100-$doubleGst)))-$price;
+				$rateAfterPaymentGateway=$gstRate*$intamojoRate;
+				$finalTax=$gstRate+$rateAfterPaymentGateway;
+				$tax = $finalTax*$price+$intamojoConstant-$price;
 				$actualPrice=$price+$tax;
 				Log::info("Actual Price=".$actualPrice);
 				$book=UdbBookDetail::where('book_name','=',$request->input('bookName'))->select('book_id','book_name')->first();
 				return view('buybooks')->with(array('price'=>$price,'tax'=>$tax,'total'=>$actualPrice,'groupid'=>null,'bookid'=>$book['book_id']));
 			}else{
-				return response()->download('pdf/'.$name);
+				return Storage::disk('public')->download('pdf/'.$request->input('bookName'));
 			}
 		}
 	}
