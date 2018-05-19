@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UdbRoleUser extends Migration
+class UdbCommonConstantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class UdbRoleUser extends Migration
      */
     public function up()
     {
-        Schema::create('udb_role_user', function (Blueprint $table) {
+		Schema::dropIfExists('udb_common_constants');
+        Schema::create('udb_common_constants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('udb_role_id')->unsigned();
-            $table->string('udb_user_email');
+			$table->string('attribute_module');
+			$table->string('attribute_key');
+			$table->string('attribute_value');
+			$table->softDeletes();
             $table->timestamps();
-        });
+        });	
     }
 
     /**
@@ -28,6 +31,6 @@ class UdbRoleUser extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('udb_role_user');
+        Schema::dropIfExists('udb_common_constants');
     }
 }

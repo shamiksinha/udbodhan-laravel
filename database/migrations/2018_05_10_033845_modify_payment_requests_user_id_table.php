@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Role extends Migration
+class ModifyPaymentRequestsUserIdTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class Role extends Migration
      */
     public function up()
     {
-       Schema::create('udb_roles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('udb_role_name');
-            $table->timestamps();
-        });
+        Schema::table('payment_requests', function (Blueprint $table) {
+			$table->string('user_id')->nullable()->before('phone');		
+		});
     }
 
     /**
@@ -27,6 +25,9 @@ class Role extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('udb_roles');
+		Schema::table('payment_requests', function (Blueprint $table) {
+			$table->dropColumn('user_id');
+		});
+        
     }
 }

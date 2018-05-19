@@ -3,7 +3,12 @@
 class="active"
 @endsection
 @section('content')
-
+<style>
+.col-md-6 {
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+</style>
 <!-- <div class="container">-->
 <div id="white-boxInside">
     <div class="row">
@@ -67,7 +72,7 @@ class="active"
 									<a class="btn btn-link" href="{{ route('register') }}">
 										Sign up for free
 									</a>-->
-									<h2><a href='{{ route('register') }}'>* Sign up</a>  |   <a href='{{ route('password.request') }}'>Forgot Password?</a></h2>								</div>
+									<h2><a href="{{ route('register') }}">* Sign up</a>  |   <a href="{{ route('password.request') }}">Forgot Password?</a></h2>								</div>
 							</div>
 						</form>
 					</div>

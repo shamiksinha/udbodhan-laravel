@@ -70,7 +70,7 @@ class SolariumController extends Controller {
 					$queryString.=' ';//' and ';
 				}
 				if (!is_numeric($searchWord) and count(preg_grep('/'.$searchWord.'/',$months))<1){
-					$queryString.=$searchWord;//'author_txt_en_split:*'.$searchWord.'* or subject_txt_en_split:*'.$searchWord.'*';
+					$queryString.='*'.$searchWord.'*';//'author_txt_en_split:*'.$searchWord.'* or subject_txt_en_split:*'.$searchWord.'*';
 					// or bookmonth_txt_en_split:*'.$searchWord.'*';
 				} /* else if (!is_numeric($searchWord) and count(preg_grep('/'.$searchWord.'/',$months))>0) {
 					$monthsfq[]=$searchWord;

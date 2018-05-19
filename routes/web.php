@@ -59,6 +59,8 @@ Route::get('showswf/{bookName}', 'PdfController@showSwf');
 
 Route::get('/download/{bookName}', 'PdfController@download');
 
+Route::post('/download', 'PdfController@downloadBook');
+
 Route::get("/showSelectedPdf/{bookName}",function($id){
 	return view('showSearchPDF')->with('bookName',$id)->with('bookPath','pdf/'.$id);//);
 });

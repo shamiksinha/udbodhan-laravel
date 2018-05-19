@@ -121,7 +121,7 @@ html, body {
 
 }
 
-#box, #boxinsd
+div#box>span, #boxinsd
 {
 
   width:100%;

@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Storage;
-use App\ReadCsvFacade;
-use App\UdbBookDetail;
-use Illuminate\Support\Facades\Log;
 
 class CreateUdbBookDetailsTable extends Migration
 {
@@ -29,7 +26,7 @@ class CreateUdbBookDetailsTable extends Migration
 			$table->primary('book_id');
         });
 		
-		Log::info(getcwd() . "\n");
+		/*Log::info(getcwd() . "\n");
 		$currDir='./'.Storage::url('app/');
 		$currFile=$currDir.'BookDetails.csv';
 		Log::info("File Exists? ".file_exists($currFile));
@@ -44,7 +41,7 @@ class CreateUdbBookDetailsTable extends Migration
 				$udbBookDetail->book_number = $bookDetailRow ['book_number'];
 				$udbBookDetail->save ();
 			}
-		}
+		}*/
 	}
 
     /**
